@@ -370,7 +370,7 @@ export default function Home() {
               </motion.div>
               
               <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                If your business runs on phone calls, schedules, estimates, invoices, and a handful of software tools, there is almost certainly room to make the process work better.
+                 If your business runs on phone calls, schedules, estimates, invoices, and a handful of software tools, there is often room to make the process work better.
               </motion.p>
             </motion.div>
           </div>
@@ -605,13 +605,6 @@ export default function Home() {
                   <p className="text-muted-foreground">
                     Thanks for reaching out. I'll review your details and get back to you shortly to discuss next steps.
                   </p>
-                  <Button 
-                    variant="outline" 
-                    className="mt-8 bg-white"
-                    onClick={() => setSubmitSuccess(false)}
-                  >
-                    Send another message
-                  </Button>
                 </div>
               ) : (
                 <Form {...form}>
@@ -664,7 +657,7 @@ export default function Home() {
                         name="phone"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-foreground font-semibold">Phone Number</FormLabel>
+                            <FormLabel className="text-foreground font-semibold">Phone Number (Optional)</FormLabel>
                             <FormControl>
                               <Input type="tel" placeholder="(555) 123-4567" {...field} className="bg-white" />
                             </FormControl>
