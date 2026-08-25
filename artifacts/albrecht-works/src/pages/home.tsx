@@ -15,7 +15,6 @@ import {
   LineChart, 
   Settings, 
   User, 
-  ExternalLink,
   Mail
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -196,7 +195,7 @@ export default function Home() {
                 </motion.h1>
                 
                 <motion.div variants={fadeInUp} className="text-lg md:text-xl font-medium text-primary mb-6">
-                  AI • Automation • Technology
+                  Streamlined Workflows • Integrated Software • Practical Automation
                 </motion.div>
                 
                 <motion.p variants={fadeInUp} className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
@@ -217,13 +216,13 @@ export default function Home() {
                     <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center border border-border">
                       <Check size={12} className="text-primary" />
                     </div>
-                    20+ Years Technology Leadership
+                    20+ Years Business & Technology Leadership
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center border border-border">
                       <Check size={12} className="text-primary" />
                     </div>
-                    No AI Hype or Vendor Agenda
+                    No Vendor Agenda
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center border border-border">
@@ -234,36 +233,57 @@ export default function Home() {
                 </motion.div>
               </motion.div>
 
-              {/* Hero Visual */}
+              {/* Operational Blueprint Preview */}
               <motion.div 
                 className="lg:col-span-5 lg:pl-10"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="relative aspect-[4/5] rounded-2xl border border-border bg-secondary overflow-hidden shadow-2xl shadow-slate-200/50 flex flex-col items-center justify-center group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/5 z-0"></div>
-                  
-                  {/* Subtle placeholder styling ready for real photo */}
-                  <div className="relative z-10 w-32 h-32 rounded-full border-4 border-white shadow-sm bg-muted flex items-center justify-center mb-6 overflow-hidden">
-                    <User size={48} className="text-muted-foreground/30" />
-                  </div>
-                  
-                  <div className="relative z-10 text-center px-6">
-                    <h3 className="font-heading font-bold text-xl text-foreground mb-1">Chris Albrecht</h3>
-                    <p className="text-sm font-medium text-muted-foreground mb-2">M.S. Computer Science • MBA</p>
-                    <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground font-medium bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full border border-border/50">
-                      <MapPin size={12} />
-                      Libertyville, IL
+                <div className="relative rounded-2xl border border-border bg-secondary overflow-hidden shadow-2xl shadow-slate-200/50 p-6 md:p-8">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-primary/5 pointer-events-none"></div>
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between gap-4 mb-8">
+                      <div>
+                        <p className="text-[11px] uppercase tracking-[0.18em] font-bold text-primary mb-2">
+                          Operational blueprint
+                        </p>
+                        <h3 className="font-heading font-bold text-xl text-foreground">
+                          From friction to flow
+                        </h3>
+                      </div>
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center border border-primary/10">
+                        <Settings size={18} className="text-primary" />
+                      </div>
                     </div>
-                  </div>
-                  
-                  {/* Decorative Elements */}
-                  <div className="absolute top-6 right-6 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center backdrop-blur-md">
-                    <Settings size={20} className="text-primary" />
-                  </div>
-                  <div className="absolute bottom-6 left-6 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm border border-border/50">
-                    <LineChart size={20} className="text-foreground" />
+
+                    <div className="space-y-3">
+                      {[
+                        { step: "01", title: "Intake", desc: "Capture the right details once", icon: Briefcase },
+                        { step: "02", title: "Automation", desc: "Move work without manual handoffs", icon: Activity },
+                        { step: "03", title: "Reconciled Invoices", desc: "Close the loop with confidence", icon: LineChart },
+                      ].map(({ step, title, desc, icon: Icon }, index) => (
+                        <React.Fragment key={step}>
+                          <div className="flex items-center gap-4 rounded-xl bg-white/80 border border-border/80 px-4 py-4 shadow-sm">
+                            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10 text-primary shrink-0">
+                              <Icon size={17} />
+                            </div>
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-[10px] font-bold tracking-widest text-primary">{step}</span>
+                                <h4 className="font-heading font-bold text-sm text-foreground">{title}</h4>
+                              </div>
+                              <p className="text-xs text-muted-foreground mt-1">{desc}</p>
+                            </div>
+                          </div>
+                          {index < 2 && (
+                            <div className="flex justify-center -my-1">
+                              <ArrowRight size={15} className="rotate-90 text-primary/60" />
+                            </div>
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -286,7 +306,7 @@ export default function Home() {
                 Where Your Business May Be Losing Time & Money
               </motion.h2>
               <motion.p variants={fadeInUp} className="text-lg text-muted-foreground">
-                Most growing businesses don't have a technology shortage. They have repetitive work, disconnected systems, and manual bottlenecks.
+                Most of the time, bottlenecks come from the manual steps connecting your systems rather than the tools themselves.
               </motion.p>
             </motion.div>
 
@@ -344,6 +364,7 @@ export default function Home() {
                   "HVAC & Plumbing", 
                   "Electrical & Contracting", 
                   "Landscaping & Home Services",
+                  "Roofing & Exterior Contractors",
                   "Auto Repair & Specialty Shops",
                   "Professional Services"
                 ].map((pill, i) => (
@@ -380,7 +401,7 @@ export default function Home() {
                       The 90-Minute Operations Diagnostic
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl">
-                      A focused operational walkthrough designed to understand how your business actually runs—from initial customer contact through scheduling, fulfillment, invoicing, and payment—and identify the highest-value opportunities to improve it.
+                      A focused operational walkthrough of how your business actually runs, from initial customer contact through final payment. Together, we identify your highest-value opportunities to save time and streamline daily operations.
                     </p>
                   </div>
                   <div className="shrink-0 bg-secondary px-6 py-4 rounded-xl border border-border text-center">
@@ -428,8 +449,8 @@ export default function Home() {
                   <div className="flex items-start gap-3 flex-1">
                     <Check className="text-primary shrink-0 mt-0.5" size={20} />
                     <div>
-                      <span className="font-bold text-foreground block mb-1">No-pressure diagnostic:</span>
-                      <span className="text-sm text-muted-foreground">If I don't uncover practical opportunities worth pursuing, I'll tell you so.</span>
+                      <span className="font-bold text-foreground block mb-1">Independent, Honest Assessment:</span>
+                      <span className="text-sm text-muted-foreground">We only recommend changes that solve real business problems, with zero software commissions, vendor kickbacks, or outside incentives. If an existing tool or process works, we leave it alone.</span>
                     </div>
                   </div>
                 </div>
@@ -488,23 +509,12 @@ export default function Home() {
                 
                 <motion.div variants={fadeInUp} className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
                   <p>
-                    With over 20 years of technology and systems leadership, I founded Albrecht Works to help local businesses modernize their practical operations without the complexity of enterprise software.
+                    With over 20 years of systems and technology leadership, I founded Albrecht Works to help local businesses modernize their practical operations without the complexity of enterprise software.
                   </p>
                   <p>
-                    I live in Libertyville with my wife and four kids. When I'm not untangling business workflows, I'm a marathon runner, a BBQ enthusiast, and a volunteer chess coach.
+                    I live in Libertyville with my wife and four kids. Outside interests include running marathons, a BBQ enthusiast, and a volunteer chess coach.
                   </p>
                 </motion.div>
-                
-                <motion.a 
-                  variants={fadeInUp}
-                  href="https://chrisalbrecht.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary font-bold hover:text-primary/80 transition-colors group"
-                >
-                  View Chris's Professional Background & Portfolio 
-                  <ExternalLink size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </motion.a>
               </motion.div>
 
             </div>
@@ -544,7 +554,7 @@ export default function Home() {
                 },
                 {
                   title: "Direct Access",
-                  desc: "You work directly with me—not an account manager or junior subcontractor learning on your dime."
+                  desc: "You work directly with me from start to finish on every stage of your project."
                 }
               ].map((card, i) => (
                 <motion.div key={i} variants={fadeInUp} className="bg-white p-8 rounded-xl border border-border text-center shadow-sm">
@@ -726,11 +736,6 @@ export default function Home() {
               </p>
             </div>
             
-            <div className="flex gap-6 text-sm text-slate-400">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
-              <button onClick={() => scrollTo('contact')} className="hover:text-white transition-colors">Contact</button>
-            </div>
           </div>
           
           <div className="border-t border-slate-800 mt-8 pt-8 text-center text-sm text-slate-500">

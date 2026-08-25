@@ -1,0 +1,20 @@
+Please refine and polish the current version of the Albrecht Works landing page with the following targeted adjustments:
+
+1. Hero Section Cleanup:
+   - Remove the duplicate avatar/headshot card from the right side of the Hero section. 
+   - Instead, give the Hero copy generous breathing room on the left (or place a clean, modern "Operational Blueprint Preview" card on the right that showcases a sample 3-step workflow diagram: Intake ➔ Automation ➔ Reconciled Invoices).
+   - Keep the local badge ("📍 Based in Libertyville..."), the bold headline "Make Your Business Work Smarter.", the subcategory "AI • Automation • Technology", and the dual CTA buttons prominent.
+
+2. 
+a. Change the text '20+ Years Technology Leadership' to '20+ Years Business & Technology Leadership'
+b. Change the text 'No AI Hype or Vendor Agenda' to just 'No Vendor Agenda'
+c. Change the text 'A focused operational walkthrough designed to understand how your business actually runs—from initial customer contact through scheduling, fulfillment, invoicing, and payment—and identify the highest-value opportunities to improve it.' to 'A focused operational walkthrough of how your business actually runs, from initial customer contact through final payment. Together, we identify your highest-value opportunities to save time and streamline daily operations.'
+d. Change the text 'No-pressure diagnostic: If I don't uncover practical opportunities worth pursuing, I'll tell you so. ' to 'Independent, Honest Assessment: We only recommend changes that solve real business problems, with zero software commissions, vendor kickbacks, or outside incentives. If an existing tool or process works, we leave it alone.'
+e. Change the text 'With over 20 years of technology and systems leadership, I founded Albrecht Works to help local businesses modernize their practical operations without the complexity of enterprise software.' to 'With over 20 years of systems and technology leadership, I founded Albrecht Works to help local businesses modernize their practical operations without the complexity of enterprise software.'
+f. Change the text, 'I live in Libertyville with my wife and four kids. When I'm not untangling business workflows, I'm a marathon runner, a BBQ enthusiast, and a volunteer chess coach.' to 'I live in Libertyville with my wife and four kids. Outside interests include running marathons, a BBQ enthusiast, and a volunteer chess coach.'
+g. Remove the text and link about 'View Chris's Professional Background & Portfolio' since I want this site independent of that site.
+h. Change this text 'You work directly with me—not an account manager or junior subcontractor learning on your dime.' to 'You work directly with me from start to finish on every stage of your project.'
+i. Remove the items in the footer 1) Privacy Policy 2) Terms 3) Contact
+j. change this text in the hero section 'AI • Automation • Technology' to 'Streamlined Workflows • Integrated Software • Practical Automation'
+k. Change the text 'Most growing businesses don't have a technology shortage. They have repetitive work, disconnected systems, and manual bottlenecks.' to 'Most of the time, bottlenecks come from the manual steps connecting your systems rather than the tools themselves.'
+l. Add 'Roofing & Exterior Contractors' to the bubbles in the Built for Businesses Like Yours section
