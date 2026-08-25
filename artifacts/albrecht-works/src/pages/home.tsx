@@ -59,6 +59,7 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,19 +82,26 @@ export default function Home() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    const subject = `Albrecht Works diagnostic request from ${values.name}`;
-    const body = [
-      `Name: ${values.name}`,
-      `Business Name & Trade: ${values.businessName}`,
-      `Email: ${values.email}`,
-      `Phone: ${values.phone?.trim() || 'Not provided'}`,
-      `How can I help?: ${values.headache?.trim() || 'Not provided'}`,
-    ].join('\n');
+    setSubmitError(null);
 
-    window.location.href = `mailto:chris@albrechtworks.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
-    form.reset();
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error('Contact form delivery failed');
+      }
+
+      setSubmitSuccess(true);
+      form.reset();
+    } catch {
+      setSubmitError('Something went wrong while sending your request. Please try again or email chris@albrechtworks.com directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const scrollTo = (id: string) => {
@@ -609,9 +617,9 @@ export default function Home() {
                   <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Check size={32} />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3">Email Draft Ready</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-3">Message Sent</h3>
                   <p className="text-muted-foreground">
-                    Your request is addressed to chris@albrechtworks.com. Send it from your email app to complete your request.
+                    Thanks for reaching out. I'll review your details and get back to you shortly to discuss next steps.
                   </p>
                 </div>
               ) : (
@@ -706,6 +714,11 @@ export default function Home() {
                         "Request Operations Diagnostic"
                       )}
                     </Button>
+                    {submitError && (
+                      <p className="text-sm text-destructive text-center" role="alert">
+                        {submitError}
+                      </p>
+                    )}
                   </form>
                 </Form>
               )}

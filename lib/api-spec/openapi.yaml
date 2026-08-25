@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: contact
+    description: Contact form operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /contact:
+    post:
+      operationId: submitContactForm
+      tags: [contact]
+      summary: Send a contact form submission
+      description: Delivers a contact form submission to Albrecht Works.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactFormRequest"
+      responses:
+        "200":
+          description: Contact form submission delivered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactFormResponse"
+        "400":
+          description: Invalid contact form submission
+        "502":
+          description: Email delivery failed
 components:
   schemas:
     HealthStatus:
@@ -33,4 +58,31 @@ components:
           type: string
       required:
         - status
+    ContactFormRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 2
+        businessName:
+          type: string
+          minLength: 2
+        email:
+          type: string
+          pattern: '^[^\s@]+@[^\s@]+\.[^\s@]+$'
+        phone:
+          type: string
+        headache:
+          type: string
+      required:
+        - name
+        - businessName
+        - email
+    ContactFormResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+        - success
 

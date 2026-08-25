@@ -1,1 +1,2 @@
 - [Framer Motion animation typing](animation-typing.md) — type shared variants explicitly when cubic-bezier easing arrays are used.
+- [Resend sender verification](resend-sender-verification.md) — use Resend’s default sender until the branded domain is verified.
