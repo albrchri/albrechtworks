@@ -256,15 +256,15 @@ export default function Home() {
                   <div className="relative z-10">
                     <div className="flex items-start justify-between gap-4 mb-8">
                       <div>
-                        <p className="text-[11px] uppercase tracking-[0.18em] font-bold text-primary mb-2">
-                          Operational blueprint
-                        </p>
-                        <h3 className="font-heading font-bold text-xl text-foreground">
-                          From friction to flow
+                        <h3 className="font-heading text-slate-900 font-bold text-base md:text-lg">
+                          From Friction to Flow
                         </h3>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          Eliminating bottlenecks across your workflow.
+                        </p>
                       </div>
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center border border-primary/10">
-                        <Workflow size={18} className="text-primary" />
+                      <div className="bg-blue-50 text-blue-600 p-2 rounded-xl flex items-center justify-center">
+                        <Workflow size={20} />
                       </div>
                     </div>
 
@@ -522,7 +522,7 @@ export default function Home() {
               >
                 <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 leading-tight">
                   Technical Expertise.<br/>
-                  <span className="text-muted-foreground">Practical Business Judgment.</span>
+                   <span className="text-blue-600 font-bold">Practical Business Judgment.</span>
                 </motion.h2>
                 
                 <motion.div variants={fadeInUp} className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
@@ -549,8 +549,8 @@ export default function Home() {
               variants={staggerContainer}
               className="text-center mb-16"
             >
-              <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-heading font-bold text-foreground">
-                Direct. Honest. Practical.
+              <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-heading font-bold text-slate-900">
+                Direct. Honest. <span className="text-blue-600 font-bold">Practical.</span>
               </motion.h2>
             </motion.div>
 
@@ -576,8 +576,8 @@ export default function Home() {
                 }
               ].map((card, i) => (
                 <motion.div key={i} variants={fadeInUp} className="bg-white p-8 rounded-xl border border-border text-center shadow-sm">
-                  <div className="w-10 h-10 mx-auto bg-secondary rounded-full flex items-center justify-center mb-4 border border-border">
-                    <Check size={16} className="text-foreground" />
+                  <div className="w-10 h-10 mx-auto bg-blue-50 border border-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <Check size={16} className="text-blue-600" />
                   </div>
                   <h4 className="font-bold text-foreground text-lg mb-3">{card.title}</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
@@ -597,8 +597,8 @@ export default function Home() {
               variants={fadeInUp}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
-                Let's Make Your Office Run Better.
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-slate-900 mb-4">
+                Let's Make Your Office Run <span className="text-blue-600 font-bold">Better.</span>
               </h2>
               <p className="text-lg text-muted-foreground">
                 Reach out directly to schedule an Operations Diagnostic or discuss your current workflow.
