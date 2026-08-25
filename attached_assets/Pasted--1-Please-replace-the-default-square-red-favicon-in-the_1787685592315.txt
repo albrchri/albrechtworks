@@ -1,0 +1,73 @@
+#1 - Please replace the default square red favicon in the browser tab with a clean, professional SVG favicon matching our exact logo colors:
+
+1. Use a clean white/off-white rounded-square badge (#FFFFFF with a subtle #E2E8F0 border).
+2. Center the letters "AW" using our exact brand font colors:
+   - "A" in Deep Slate (#0F172A)
+   - "W" in Royal Blue (#2563EB) with an italic/bold style matching "Works"
+3. Add the SVG favicon link to the <head> of the site:
+   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23FFFFFF' stroke='%23E2E8F0' stroke-width='1.5'/><text x='16' y='22' font-family='system-ui, -apple-system, sans-serif' font-size='14' font-weight='800' fill='%230F172A' text-anchor='middle'>A<tspan fill='%232563EB' font-style='italic'>W</tspan></text></svg>">
+4. Remove any lingering placeholder or red-square favicon links.
+
+#2 - In the sticky header navigation, please remove the subtitle text ("Operations • Automation • Technology") located underneath the "Albrecht Works" logo textmark. 
+
+Keep only the clean "Albrecht Works" logo mark vertically centered with the nav links and CTA button.
+
+#3 - Update the header navigation links and targets to remove redundancy:
+
+1. Keep the text link "The Diagnostic" pointing to `#diagnostic` (so visitors can read the scope and details).
+2. Update the blue header button "Book Diagnostic" to scroll directly to the contact section (`#contact`) and smoothly focus on the form.
+
+#4 - Change the following text:
+a. Change 'I help service companies, contractors, and growing businesses reduce repetitive administrative work, improve customer follow-up, connect disconnected systems, and get more value from the technology they already use.' to 'I help local businesses reduce administrative work, improve customer follow-up, and connect separate systems so they get more value from the technology already in place."
+b. Change 'I live in Libertyville with my wife and four kids. Outside interests include running marathons, a BBQ enthusiast, and a volunteer chess coach.' to '"I live in Libertyville with my wife and four kids. In my free time, you'll find me training for marathons, working the smoker, or coaching the local chess club.'
+c. In the About section, Change 'Technology Experience.' to 'Technical Expertise.'
+
+#5 - Please update the Header Navigation and Hero Section with the following exact copy, styling, and link alignments:
+
+### A. Header & Navigation Updates
+1. Navigation Links & CTA:
+   - Navigation links: "Where We Help" (`#services` / `#where-we-help`), "The Diagnostic" (`#diagnostic`), and "About" (`#about`).
+   - Header CTA Button: Change the label to "Talk to Chris" and set its target to scroll directly to `#contact`.
+---
+### B. Hero Section Updates
+1. Body Paragraph:
+   - "I help local businesses cut repetitive administrative work, improve customer follow-up, and connect separate systems so they get more value from the technology already in place."
+2. Hero CTA Buttons:
+   - Primary Button: "Explore the Diagnostic" (scrolls to `#diagnostic`).
+   - Secondary Button: "Talk to Chris" (scrolls to `#contact`).
+
+#6- Please update the hero card visual on the right ("Operational Blueprint / From Friction to Flow"):
+
+1. Top Right Icon:
+   - Replace the gear icon with a minimal Lucide icon for workflows, such as `GitMerge`, `Workflow`, or `ArrowRightLeft` (in subtle gray/blue).
+
+2. Card Content & Steps:
+   - Header: "Operational Blueprint" (badge) and "From Friction to Flow" (title)
+   - Step 01:
+     - Title: "Intake"
+     - Subtitle: "Capture leads and project details cleanly"
+   - Step 02:
+     - Title: "Streamline"
+     - Subtitle: "Move work between systems seamlessly"
+   - Step 03:
+     - Title: "Completion"
+     - Subtitle: "Close out jobs and follow up with confidence"
+
+#7 - In the About section credential list, please update the education line:
+
+Change:
+"M.S. Computer Science — IIT Chicago"
+
+To:
+"M.S. in Computer Science — Illinois Institute of Technology"
+
+#8 - In the contact/intake form, please update the message field to make it low-friction:
+
+1. Update the label:
+   - Change: "Biggest Daily Administrative or Software Headache *"
+   - To: "How can I help? (Optional)"
+2. Update the input properties:
+   - Remove the `required` validation rule so this field is optional.
+   - Remove any required asterisk `*` next to the label.
+3. Update the placeholder text:
+   - Set placeholder to: "Briefly describe what you're trying to solve or improve..."

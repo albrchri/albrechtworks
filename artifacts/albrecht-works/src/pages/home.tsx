@@ -15,6 +15,7 @@ import {
   LineChart, 
   Settings, 
   User, 
+  Workflow,
   Mail
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -34,7 +35,7 @@ const formSchema = z.object({
   businessName: z.string().min(2, 'Business Name & Trade is required'),
   email: z.string().email('Please enter a valid email address'),
   phone: z.string().optional(),
-  headache: z.string().min(10, 'Please provide a bit more detail about your current workflow issues.'),
+  headache: z.string().optional(),
 });
 
 // Animation variants
@@ -113,14 +114,11 @@ export default function Home() {
         }`}
       >
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-          <div className="flex flex-col cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <div className="flex cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="text-xl md:text-2xl tracking-tight flex items-center gap-1.5">
               <span className="font-heading font-bold text-foreground">Albrecht</span>
               <span className="font-heading font-bold italic text-primary">Works</span>
             </div>
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mt-0.5 hidden sm:block">
-              Operations • Automation • Technology
-            </span>
           </div>
 
           {/* Desktop Nav */}
@@ -134,8 +132,8 @@ export default function Home() {
             <button onClick={() => scrollTo('about')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               About
             </button>
-            <Button onClick={() => scrollTo('diagnostic')} className="ml-2 font-medium shadow-sm">
-              Book Diagnostic
+            <Button onClick={() => scrollTo('contact')} className="ml-2 font-medium shadow-sm">
+              Talk to Chris
             </Button>
           </nav>
 
@@ -161,8 +159,8 @@ export default function Home() {
             <button onClick={() => scrollTo('about')} className="text-left px-4 py-3 text-sm font-medium border-b border-border/50">
               About
             </button>
-            <Button onClick={() => scrollTo('diagnostic')} className="w-full mt-2">
-              Book Diagnostic
+            <Button onClick={() => scrollTo('contact')} className="w-full mt-2">
+              Talk to Chris
             </Button>
           </div>
         )}
@@ -199,7 +197,7 @@ export default function Home() {
                 </motion.div>
                 
                 <motion.p variants={fadeInUp} className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-                  I help service companies, contractors, and growing businesses reduce repetitive administrative work, improve customer follow-up, connect disconnected systems, and get more value from the technology they already use.
+                  I help local businesses cut repetitive administrative work, improve customer follow-up, and connect separate systems so they get more value from the technology already in place.
                 </motion.p>
                 
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
@@ -253,15 +251,15 @@ export default function Home() {
                         </h3>
                       </div>
                       <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center border border-primary/10">
-                        <Settings size={18} className="text-primary" />
+                        <Workflow size={18} className="text-primary" />
                       </div>
                     </div>
 
                     <div className="space-y-3">
                       {[
-                        { step: "01", title: "Intake", desc: "Capture the right details once", icon: Briefcase },
-                        { step: "02", title: "Automation", desc: "Move work without manual handoffs", icon: Activity },
-                        { step: "03", title: "Reconciled Invoices", desc: "Close the loop with confidence", icon: LineChart },
+                        { step: "01", title: "Intake", desc: "Capture leads and project details cleanly", icon: Briefcase },
+                        { step: "02", title: "Streamline", desc: "Move work between systems seamlessly", icon: Activity },
+                        { step: "03", title: "Completion", desc: "Close out jobs and follow up with confidence", icon: LineChart },
                       ].map(({ step, title, desc, icon: Icon }, index) => (
                         <React.Fragment key={step}>
                           <div className="flex items-center gap-4 rounded-xl bg-white/80 border border-border/80 px-4 py-4 shadow-sm">
@@ -488,7 +486,7 @@ export default function Home() {
                     <h3 className="font-heading font-bold text-xl text-foreground">Chris Albrecht</h3>
                     <div className="w-8 h-1 bg-primary mx-auto rounded-full"></div>
                     <div className="text-sm text-muted-foreground font-medium pt-2">
-                      M.S. Computer Science — IIT Chicago<br/>
+                      M.S. in Computer Science — Illinois Institute of Technology<br/>
                       MBA — Dominican University
                     </div>
                   </div>
@@ -503,7 +501,7 @@ export default function Home() {
                 variants={staggerContainer}
               >
                 <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 leading-tight">
-                  Technology Experience.<br/>
+                  Technical Expertise.<br/>
                   <span className="text-muted-foreground">Practical Business Judgment.</span>
                 </motion.h2>
                 
@@ -512,7 +510,7 @@ export default function Home() {
                     With over 20 years of systems and technology leadership, I founded Albrecht Works to help local businesses modernize their practical operations without the complexity of enterprise software.
                   </p>
                   <p>
-                    I live in Libertyville with my wife and four kids. Outside interests include running marathons, a BBQ enthusiast, and a volunteer chess coach.
+                    I live in Libertyville with my wife and four kids. In my free time, you'll find me training for marathons, working the smoker, or coaching the local chess club.
                   </p>
                 </motion.div>
               </motion.div>
@@ -677,10 +675,10 @@ export default function Home() {
                       name="headache"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-foreground font-semibold">Biggest Daily Administrative or Software Headache <span className="text-destructive">*</span></FormLabel>
+                          <FormLabel className="text-foreground font-semibold">How can I help? (Optional)</FormLabel>
                           <FormControl>
                             <Textarea 
-                              placeholder="e.g. We spend hours copying data from our scheduling tool into QuickBooks, and still miss invoices..."
+                              placeholder="Briefly describe what you're trying to solve or improve..."
                               className="resize-none h-32 bg-white"
                               {...field}
                             />
