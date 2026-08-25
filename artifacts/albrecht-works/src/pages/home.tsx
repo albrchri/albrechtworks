@@ -35,7 +35,7 @@ const formSchema = z.object({
   businessName: z.string().min(2, 'Business Name & Trade is required'),
   email: z.string().email('Please enter a valid email address'),
   phone: z.string().optional(),
-  headache: z.string().optional(),
+  message: z.string().optional(),
 });
 
 // Animation variants
@@ -76,7 +76,7 @@ export default function Home() {
       businessName: '',
       email: '',
       phone: '',
-      headache: '',
+      message: '',
     },
   });
 
@@ -617,7 +617,7 @@ export default function Home() {
                   <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Check size={32} />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3">Message Sent</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-3">Message Sent!</h3>
                   <p className="text-muted-foreground">
                     Thanks for reaching out. I'll review your details and get back to you shortly to discuss next steps.
                   </p>
@@ -685,7 +685,7 @@ export default function Home() {
 
                     <FormField
                       control={form.control}
-                      name="headache"
+                      name="message"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-foreground font-semibold">How can I help? (Optional)</FormLabel>
@@ -732,7 +732,7 @@ export default function Home() {
               className="text-center mt-8 text-sm text-muted-foreground flex items-center justify-center gap-2"
             >
               <Mail size={16} />
-              Prefer direct email? Reach out anytime at <a href="mailto:chris@albrechtworks.com" className="font-medium text-primary hover:underline">chris@albrechtworks.com</a>
+               Prefer direct email? Reach out anytime at <span className="font-medium text-primary">chris@albrechtworks.com</span>
             </motion.div>
           </div>
         </section>

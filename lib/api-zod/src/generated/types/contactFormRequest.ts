@@ -14,5 +14,5 @@ export interface ContactFormRequest {
   /** @pattern ^[^\s@]+@[^\s@]+\.[^\s@]+$ */
   email: string;
   phone?: string;
-  headache?: string;
+  message?: string;
 }

@@ -16,13 +16,13 @@ router.post("/contact", async (req, res): Promise<void> => {
     return;
   }
 
-  const { name, businessName, email, phone, headache } = parsed.data;
-  const message = [
+  const { name, businessName, email, phone, message } = parsed.data;
+  const emailBody = [
     `Name: ${name}`,
     `Business Name & Trade: ${businessName}`,
     `Email: ${email}`,
     `Phone: ${phone?.trim() || "Not provided"}`,
-    `How can I help?: ${headache?.trim() || "Not provided"}`,
+    `How can I help?: ${message?.trim() || "Not provided"}`,
   ].join("\n");
 
   try {
@@ -37,7 +37,7 @@ router.post("/contact", async (req, res): Promise<void> => {
         to: ["chris@albrechtworks.com"],
         reply_to: email,
         subject: `Operations Diagnostic request from ${name}`,
-        text: message,
+        text: emailBody,
       }),
     });
 

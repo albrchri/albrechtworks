@@ -33,7 +33,7 @@ export const SubmitContactFormBody = zod.object({
   "businessName": zod.string().min(submitContactFormBodyBusinessNameMin),
   "email": zod.string().regex(submitContactFormBodyEmailRegExp),
   "phone": zod.string().optional(),
-  "headache": zod.string().optional()
+  "message": zod.string().optional()
 })
 
 export const SubmitContactFormResponse = zod.object({

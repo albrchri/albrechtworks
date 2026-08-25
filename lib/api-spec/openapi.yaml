@@ -72,7 +72,7 @@ components:
           pattern: '^[^\s@]+@[^\s@]+\.[^\s@]+$'
         phone:
           type: string
-        headache:
+        message:
           type: string
       required:
         - name
