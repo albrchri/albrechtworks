@@ -81,8 +81,16 @@ export default function Home() {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+    const subject = `Albrecht Works diagnostic request from ${values.name}`;
+    const body = [
+      `Name: ${values.name}`,
+      `Business Name & Trade: ${values.businessName}`,
+      `Email: ${values.email}`,
+      `Phone: ${values.phone?.trim() || 'Not provided'}`,
+      `How can I help?: ${values.headache?.trim() || 'Not provided'}`,
+    ].join('\n');
+
+    window.location.href = `mailto:chris@albrechtworks.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setIsSubmitting(false);
     setSubmitSuccess(true);
     form.reset();
@@ -601,9 +609,9 @@ export default function Home() {
                   <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Check size={32} />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3">Message Received</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-3">Email Draft Ready</h3>
                   <p className="text-muted-foreground">
-                    Thanks for reaching out. I'll review your details and get back to you shortly to discuss next steps.
+                    Your request is addressed to chris@albrechtworks.com. Send it from your email app to complete your request.
                   </p>
                 </div>
               ) : (
