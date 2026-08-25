@@ -1,0 +1,33 @@
+Please apply the following updates:
+
+1. Header & Hero CTAs:
+   - In the header navigation, rename the primary blue button from "Talk to Chris" to "Contact" (keeps target `#contact`).
+   - In the Hero section, update the primary button label to "Learn About the Diagnostic" (keeps target `#diagnostic`).
+   - Remove the secondary "Talk to Chris" button from the Hero section.
+
+2. Headshot Image:
+   - In the About section photo frame, replace the placeholder avatar icon with the uploaded image file `headshot.jpg` (or `/headshot.jpg` / `/assets/headshot.jpg`).
+   - Ensure the `<img>` tag has `w-full h-full object-cover rounded-lg` styling so it fits the container cleanly.
+
+3. Education Section Formatting:
+   - Reformat the credentials below the name in the About card so each degree and institution sits on its own clean two-line block with a small margin between them:
+     - Block 1:
+       - **M.S. in Computer Science** (font-semibold, text-slate-800)
+       - Illinois Institute of Technology (text-slate-500, text-xs or text-sm)
+     - Block 2 (with 8px top margin):
+       - **MBA** (font-semibold, text-slate-800)
+       - Dominican University (text-slate-500, text-xs or text-sm)
+
+4. In the "90-Minute Operations Diagnostic" card, please restyle the 3-step breakdown (01 Map the Workflow, 02 Find the Friction, 03 Prioritize the Fixes):
+
+A. Micro-Card Containers:
+   - Wrap each of the 3 steps inside its own clean sub-card using:
+     - Background: `bg-slate-50/70` (or `bg-slate-50`)
+     - Border: `border border-slate-200/80 rounded-xl`
+     - Padding: `p-5`
+     - Flex/Grid: Arrange them side-by-side in a 3-column grid on desktop (`grid grid-cols-1 md:grid-cols-3 gap-4`).
+
+B. Number & Typography Styling:
+   - Numbers (01, 02, 03): Make them crisp and clearly visible using `text-blue-600 font-extrabold text-sm tracking-wider uppercase mb-2`.
+   - Step Titles: `text-slate-900 font-bold text-base mb-2`.
+   - Descriptions: `text-slate-600 text-sm leading-relaxed`.

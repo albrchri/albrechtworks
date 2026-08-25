@@ -133,7 +133,7 @@ export default function Home() {
               About
             </button>
             <Button onClick={() => scrollTo('contact')} className="ml-2 font-medium shadow-sm">
-              Talk to Chris
+              Contact
             </Button>
           </nav>
 
@@ -160,7 +160,7 @@ export default function Home() {
               About
             </button>
             <Button onClick={() => scrollTo('contact')} className="w-full mt-2">
-              Talk to Chris
+              Contact
             </Button>
           </div>
         )}
@@ -202,10 +202,7 @@ export default function Home() {
                 
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
                   <Button size="lg" className="w-full sm:w-auto text-base shadow-sm" onClick={() => scrollTo('diagnostic')}>
-                    Book a 90-Minute Diagnostic
-                  </Button>
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto text-base bg-white" onClick={() => scrollTo('contact')}>
-                    Talk to Chris
+                    Learn About the Diagnostic
                   </Button>
                 </motion.div>
                 
@@ -410,7 +407,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-6 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
                   {[
                     {
                       step: "01",
@@ -428,10 +425,10 @@ export default function Home() {
                       desc: "Receive a concise action plan highlighting highest-impact opportunities, potential time/cost savings, and recommended next steps."
                     }
                   ].map((s, i) => (
-                    <div key={i} className="relative">
-                      <div className="text-4xl font-heading font-black text-secondary mb-2 -ml-2">{s.step}</div>
-                      <h4 className="text-lg font-bold text-foreground mb-2 relative z-10">{s.title}</h4>
-                      <p className="text-sm text-muted-foreground relative z-10">{s.desc}</p>
+                    <div key={i} className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-5">
+                      <div className="text-blue-600 font-extrabold text-sm tracking-wider uppercase mb-2">{s.step}</div>
+                      <h4 className="text-slate-900 font-bold text-base mb-2">{s.title}</h4>
+                      <p className="text-slate-600 text-sm leading-relaxed">{s.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -477,17 +474,24 @@ export default function Home() {
               >
                 <div className="bg-secondary rounded-2xl p-6 border border-border shadow-sm">
                   <div className="aspect-square rounded-xl bg-white border border-border mb-6 flex items-center justify-center overflow-hidden relative">
-                     {/* Placeholder for real headshot */}
-                     <div className="absolute inset-0 flex items-center justify-center">
-                        <User size={64} className="text-muted-foreground/20" />
-                     </div>
+                     <img
+                       src="/headshot.jpg"
+                       alt="Chris Albrecht"
+                       className="w-full h-full object-cover rounded-lg"
+                     />
                   </div>
                   <div className="text-center space-y-2 pb-2">
                     <h3 className="font-heading font-bold text-xl text-foreground">Chris Albrecht</h3>
                     <div className="w-8 h-1 bg-primary mx-auto rounded-full"></div>
-                    <div className="text-sm text-muted-foreground font-medium pt-2">
-                      M.S. in Computer Science — Illinois Institute of Technology<br/>
-                      MBA — Dominican University
+                    <div className="text-sm pt-2 space-y-2">
+                      <div>
+                        <div className="font-semibold text-slate-800">M.S. in Computer Science</div>
+                        <div className="text-slate-500 text-sm">Illinois Institute of Technology</div>
+                      </div>
+                      <div>
+                        <div className="font-semibold text-slate-800">MBA</div>
+                        <div className="text-slate-500 text-sm">Dominican University</div>
+                      </div>
                     </div>
                   </div>
                 </div>
