@@ -1,0 +1,111 @@
+Build a modern, high-converting, responsive single-page website for "Albrecht Works" (domain: albrechtworks.com), an independent business operations, technology, and workflow automation consultancy based in Libertyville, Illinois, founded by Chris Albrecht.
+
+### 1. Technology & Design Framework
+- Platform: Clean, responsive single-page web application using HTML5, Tailwind CSS, and Vanilla JavaScript.
+- Typography: Use Plus Jakarta Sans for headings and Inter for body text (clean, legible, modern).
+- Color Palette:
+  - Background: Clean White (#FFFFFF) with subtle Off-White/Canvas sections (#F8FAFC)
+  - Primary Text & Headings: Deep Slate Navy (#0F172A)
+  - Secondary Text: Neutral Slate (#475569)
+  - Accent / Primary CTA: Royal Blue (#2563EB), Hover: (#1D4ED8)
+  - Borders: Light Slate (#E2E8F0)
+- Aesthetic: Mature, restrained, and trustworthy. NO generic AI brains, neon graphics, robotic artwork, or cheesy tech stock photos. Focus on clean white cards, generous whitespace, crisp typography, and 1px borders.
+
+---
+
+### 2. Header & Navigation (Sticky)
+- Logo Textmark: "Albrecht" in bold slate (#0F172A) + "Works" in bold italic royal blue (#2563EB).
+- Subtext under logo: "Operations • Automation • Technology" (small slate-500).
+- Nav Links (Smooth scroll): "Where We Help", "The Diagnostic", "About".
+- Primary Header CTA Button: "Book Diagnostic" (scrolls to #diagnostic).
+- Mobile: Include a clean, responsive hamburger toggle menu.
+
+---
+
+### 3. Hero Section
+- Local Badge Pill: "📍 Based in Libertyville • Serving Lake County, the North Shore & Beyond"
+- Main Headline: "Make Your Business Work Smarter."
+- Category Subheading: "AI • Automation • Technology"
+- Hero Description: "I help service companies, contractors, and growing businesses reduce repetitive administrative work, improve customer follow-up, connect disconnected systems, and get more value from the technology they already use."
+- Action Buttons:
+  - Primary CTA: "Book a 90-Minute Diagnostic" (scrolls to #diagnostic)
+  - Secondary CTA: "Talk to Chris" (scrolls to #contact)
+- Trust Indicators Row (under buttons):
+  - "✓ 20+ Years Technology Leadership"
+  - "✓ No AI Hype or Vendor Agenda"
+  - "✓ Clear, Fixed-Scope Engagements"
+- Hero Visual: Clean card placeholder for founder headshot (Chris Albrecht, M.S. Computer Science • MBA • Libertyville, IL).
+
+---
+
+### 4. Section: Where Friction Hides ("Where We Help")
+- Section Title: "Where Your Business May Be Losing Time & Money"
+- Section Subhead: "Most growing businesses don't have a technology shortage. They have repetitive work, disconnected systems, and manual bottlenecks."
+- 3-Card Grid:
+  - Card 1: "Reduce Administrative Work" — Automate repetitive data entry, paperwork, scheduling, and follow-up so your team spends less time on busywork.
+  - Card 2: "Capture More Opportunities" — Reduce missed calls, slow response times, and forgotten estimates so fewer good opportunities fall through the cracks.
+  - Card 3: "Make Your Technology Work Together" — Get more value from the software you already use by reducing unnecessary manual handoffs between systems.
+
+---
+
+### 5. Section: Who It's For (Audience Recognition)
+- Heading: "Built for Businesses Like Yours"
+- Category Pills: HVAC & Plumbing • Electrical & Contracting • Landscaping & Home Services • Auto Repair & Specialty Shops • Professional Services
+- Supporting Text: "If your business runs on phone calls, schedules, estimates, invoices, and a handful of software tools, there is almost certainly room to make the process work better."
+
+---
+
+### 6. Signature Offer: The 90-Minute Operations Diagnostic
+- Boxed Highlight Card (subtle blue accent/border):
+  - Badge: "Fixed-Scope Entry Offer"
+  - Title: "The 90-Minute Operations Diagnostic"
+  - Price: "$495 (Introductory Rate for Local Businesses)"
+  - Summary: "A focused operational walkthrough designed to understand how your business actually runs—from initial customer contact through scheduling, fulfillment, invoicing, and payment—and identify the highest-value opportunities to improve it."
+  - 3 Steps:
+    1. "Map the Workflow" — Follow the real customer journey and identify manual bottlenecks, duplicate data entry, and communication drop-offs.
+    2. "Find the Friction" — Review workflows, software usage, handoffs, and repetitive tasks to identify where time, money, or opportunities are being lost.
+    3. "Prioritize the Fixes" — Receive a concise action plan highlighting highest-impact opportunities, potential time/cost savings, and recommended next steps.
+  - Delivery & Guarantee:
+    - "Delivered within 3 business days: You receive a concise prioritized implementation roadmap."
+    - "No-pressure diagnostic: If I don't uncover practical opportunities worth pursuing, I'll tell you so."
+  - CTA Button: "Schedule an Operations Diagnostic" (scrolls to #contact).
+
+---
+
+### 7. Section: About Chris Albrecht
+- 2-Column Layout:
+  - Left: Headshot placeholder + credentials card ("Chris Albrecht | M.S. Computer Science — IIT Chicago | MBA — Dominican University").
+  - Right:
+    - Heading: "Technology Experience. Practical Business Judgment."
+    - Bio copy detailing 20+ years of technology and systems leadership, founding Albrecht Works to help local businesses modernize practical operations, living in Libertyville with wife and 4 kids, marathon runner, BBQ enthusiast, and volunteer chess coach.
+    - Clean link: "View Chris's Professional Background & Portfolio →" (linking to https://chrisalbrecht.com in a new tab).
+
+---
+
+### 8. Section: The Anti-Agency Trust Anchor
+- Title: "Direct. Honest. Practical."
+- 3 Trust Cards:
+  - "No Vendor Agenda" — I don't work for software vendors or resell software. Recommendations are based on what fits your business.
+  - "No AI Hype" — We only recommend automation when it solves a real operational problem.
+  - "Direct Access" — You work directly with me—not an account manager or junior subcontractor.
+
+---
+
+### 9. Section: Contact & Intake Form
+- Heading: "Let's Make Your Office Run Better."
+- Subtext: "Reach out directly to schedule an Operations Diagnostic or discuss your current workflow."
+- Form Fields:
+  - Full Name (required)
+  - Business Name & Trade (required)
+  - Email Address (required)
+  - Phone Number (optional)
+  - "Biggest Daily Administrative or Software Headache" (textarea, required)
+- Submit Button: "Request Operations Diagnostic"
+- Direct fallback note: "Prefer direct email? Reach out anytime at chris@albrechtworks.com"
+
+---
+
+### 10. Footer
+- Branding: "Albrecht Works LLC • Libertyville, Illinois • Practical Technology & Automation"
+- Links: Privacy Policy, Terms, Contact.
+- Copyright: "© 2026 Albrecht Works LLC. All rights reserved."

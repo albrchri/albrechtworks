@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Albrecht Works"
+description = "A polished single-page consultancy website for Albrecht Works, helping service companies and growing businesses reduce administrative friction through practical operations, automation, and technology guidance."
+version = "1.0.0"
+id = "artifacts/albrecht-works"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26240
+
+[services.development]
+run = "pnpm --filter @workspace/albrecht-works run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/albrecht-works", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/albrecht-works/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26240"
+BASE_PATH = "/"

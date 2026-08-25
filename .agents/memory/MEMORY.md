@@ -1,0 +1,1 @@
+- [Framer Motion animation typing](animation-typing.md) — type shared variants explicitly when cubic-bezier easing arrays are used.
