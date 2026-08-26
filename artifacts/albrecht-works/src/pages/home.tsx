@@ -410,12 +410,34 @@ export default function Home() {
                     <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider rounded-md mb-4 border border-primary/20">
                       Fixed-Scope Entry Offer
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-3">
+                    <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-2">
                       The 90-Minute Operations Diagnostic
                     </h2>
-                    <p className="text-lg text-muted-foreground max-w-2xl">
-                      A focused operational walkthrough of how your business actually runs, from initial customer contact through final payment. Together, we identify your highest-value opportunities to save time and streamline daily operations.
+                    <p className="text-base font-semibold text-primary mb-4">
+                      Let's figure out what's slowing your business down.
                     </p>
+                    <p className="text-lg text-muted-foreground max-w-2xl mb-4">
+                      I'll spend 90 minutes with you walking through how your business actually works—from the first customer call through scheduling, the work itself, invoicing and payment.
+                    </p>
+                    <p className="text-lg text-muted-foreground max-w-2xl mb-3">
+                      We'll look for things like:
+                    </p>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 max-w-2xl">
+                      {[
+                        "Repetitive data entry",
+                        "Missed or slow customer follow-up",
+                        "Manual scheduling and reminders",
+                        "Information being entered into multiple systems",
+                        "Software your team isn't getting much value from",
+                        "Simple tasks that could be automated",
+                        "Other places where time, money or opportunities may be slipping away",
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-2 text-muted-foreground text-base">
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                   <div className="shrink-0 bg-secondary px-6 py-4 rounded-xl border border-border text-center">
                     <div className="text-3xl font-heading font-extrabold text-foreground">$495</div>
@@ -425,22 +447,25 @@ export default function Home() {
                   </div>
                 </div>
 
+                <h3 className="font-heading font-bold text-lg text-foreground mb-4">
+                  Here's how it works
+                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
                   {[
                     {
                       step: "01",
-                      title: "Map the Workflow",
-                      desc: "Follow the real customer journey and identify manual bottlenecks, duplicate data entry, and communication drop-offs."
+                      title: "Walk Me Through the Business",
+                      desc: "Show me how a real customer moves from first contact to getting the job done and getting paid."
                     },
                     {
                       step: "02",
-                      title: "Find the Friction",
-                      desc: "Review workflows, software usage, handoffs, and repetitive tasks to identify where time, money, or opportunities are being lost."
+                      title: "Find the Waste",
+                      desc: "I'll look for duplicate work, manual steps, missed handoffs and other things that make the business harder to run than it needs to be."
                     },
                     {
                       step: "03",
-                      title: "Prioritize the Fixes",
-                      desc: "Receive a concise action plan highlighting highest-impact opportunities, potential time/cost savings, and recommended next steps."
+                      title: "Tell You What I'd Fix First",
+                      desc: "You'll receive a concise action plan showing the highest-value opportunities, what they could potentially save, and what I'd recommend doing next."
                     }
                   ].map((s, i) => (
                     <div key={i} className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-5">
@@ -470,7 +495,7 @@ export default function Home() {
 
                 <div className="text-center">
                   <Button size="lg" className="w-full md:w-auto text-lg px-8 shadow-md" onClick={() => scrollTo('contact')}>
-                    Schedule an Operations Diagnostic
+                    Schedule the Diagnostic
                   </Button>
                 </div>
               </div>
