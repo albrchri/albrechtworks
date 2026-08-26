@@ -139,7 +139,7 @@ export default function Home() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             <button onClick={() => scrollTo('where-we-help')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              Where We Help
+              Where I Help
             </button>
             <button onClick={() => scrollTo('diagnostic')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               The Diagnostic
@@ -166,7 +166,7 @@ export default function Home() {
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-lg p-4 flex flex-col gap-4">
             <button onClick={() => scrollTo('where-we-help')} className="text-left px-4 py-3 text-sm font-medium border-b border-border/50">
-              Where We Help
+              Where I Help
             </button>
             <button onClick={() => scrollTo('diagnostic')} className="text-left px-4 py-3 text-sm font-medium border-b border-border/50">
               The Diagnostic
