@@ -366,7 +366,7 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
             >
-              <motion.h2 variants={fadeInUp} className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6">
+              <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6">
                 Built for Businesses Like <span className="text-blue-600">Yours</span>
               </motion.h2>
 
