@@ -8,7 +8,6 @@ import {
   Menu, 
   X, 
   Check, 
-  ArrowRight, 
   Clock, 
   Briefcase, 
   Activity, 
@@ -259,7 +258,7 @@ export default function Home() {
                     <div className="flex items-start justify-between gap-4 mb-8">
                       <div>
                         <h3 className="font-heading text-slate-900 font-bold text-base md:text-lg">
-                          Find the Bottlenecks. Fix the System.
+                          Find the Bottlenecks.<br />Fix the System.
                         </h3>
                         <p className="text-sm text-muted-foreground mt-1">
                           I look across your workflows, software, and day-to-day processes to find where time, money, and opportunities are slipping away, and identify practical ways to improve them.
@@ -289,11 +288,6 @@ export default function Home() {
                               <p className="text-xs text-muted-foreground mt-1">{desc}</p>
                             </div>
                           </div>
-                          {index < 2 && (
-                            <div className="flex justify-center -my-1">
-                              <ArrowRight size={15} className="rotate-90 text-primary/60" />
-                            </div>
-                          )}
                         </React.Fragment>
                       ))}
                     </div>
