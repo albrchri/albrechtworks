@@ -442,7 +442,7 @@ export default function Home() {
                     {
                       step: "03",
                       title: "Build Your Action Plan",
-                      desc: "Within 3 business days, you'll get a prioritized list of your highest-value fixes, estimated savings, and next steps."
+                      desc: "Within 3 business days, you'll get a prioritized list of your top fixes, estimated savings, and next steps."
                     }
                   ].map((s, i) => (
                     <div key={i} className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-5">
