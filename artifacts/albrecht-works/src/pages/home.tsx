@@ -310,7 +310,7 @@ export default function Home() {
               className="text-center max-w-3xl mx-auto mb-16"
             >
               <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
-                Where Your Business May Be Losing <span className="text-blue-600">Time & Money</span>
+                Where You're Losing <span className="text-blue-600">Time & Money</span>
               </motion.h2>
               <motion.p variants={fadeInUp} className="text-lg text-muted-foreground">
                 Most friction comes from the manual steps connecting your systems rather than the tools themselves.
