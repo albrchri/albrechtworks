@@ -310,10 +310,10 @@ export default function Home() {
               className="text-center max-w-3xl mx-auto mb-16"
             >
               <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
-                Where Your Business May Be Losing Time & Money
+                Where Your Business May Be Losing <span className="text-blue-600">Time & Money</span>
               </motion.h2>
               <motion.p variants={fadeInUp} className="text-lg text-muted-foreground">
-                Most of the time, bottlenecks come from the manual steps connecting your systems rather than the tools themselves.
+                Most friction comes from the manual steps connecting your systems rather than the tools themselves.
               </motion.p>
             </motion.div>
 
@@ -327,21 +327,21 @@ export default function Home() {
               {[
                 {
                   icon: <Clock size={24} />,
-                  title: "Reduce Administrative Work",
-                  desc: "Automate repetitive data entry, paperwork, scheduling, and follow-up so your team spends less time on busywork.",
-                  example: "Ex: re-typing the same job info into your scheduling app, your invoicing software, and a spreadsheet."
+                  title: "Manual Busywork & Data Entry",
+                  desc: "Re-entering job details, juggling paper notes, and manually updating schedules takes hours away from actual revenue-generating work.",
+                  example: "Ex: Re-typing the same customer info into your scheduling app, your invoicing tool, and a spreadsheet."
                 },
                 {
                   icon: <Activity size={24} />,
-                  title: "Capture More Opportunities",
-                  desc: "Reduce missed calls, slow response times, and forgotten estimates so fewer good opportunities fall through the cracks.",
-                  example: "Ex: a potential customer who calls at 6pm, doesn't reach anyone, and calls your competitor instead."
+                  title: "Dropped Leads & Slow Follow-Up",
+                  desc: "Missed calls, delayed quotes, and forgotten estimates mean good jobs slip away to competitors who respond first.",
+                  example: "Ex: A customer calls after hours, gets voicemail, and books with the next shop on Google."
                 },
                 {
                   icon: <Settings size={24} />,
-                  title: "Make Your Technology Work Together",
-                  desc: "Get more value from the software you already use by reducing unnecessary manual handoffs between systems.",
-                  example: "Ex: paying for two tools that do almost the same thing, because nobody had time to pick one."
+                  title: "Disconnected Software & Silos",
+                  desc: "Paying for apps that don't talk to each other forces your team into slow, manual handoffs and duplicate tools.",
+                  example: "Ex: Paying for multiple tools that overlap because nobody had the time to connect them."
                 }
               ].map((card, i) => (
                 <motion.div key={i} variants={fadeInUp} className="bg-white rounded-xl p-8 border border-border shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
@@ -465,7 +465,7 @@ export default function Home() {
                     <Check className="text-primary shrink-0 mt-0.5" size={20} />
                     <div>
                       <span className="font-bold text-foreground block mb-1">Independent, Honest Assessment:</span>
-                      <span className="text-sm text-muted-foreground">We only recommend changes that solve real business problems, with zero software commissions, vendor kickbacks, or outside incentives. If an existing tool or process works, we leave it alone.</span>
+                      <span className="text-sm text-muted-foreground">Straightforward recommendations with zero software kickbacks or vendor agendas. If a tool works, I leave it alone.</span>
                     </div>
                   </div>
                 </div>
