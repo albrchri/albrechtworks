@@ -204,7 +204,7 @@ export default function Home() {
                 
                 <motion.h1 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold leading-[1.1] tracking-tight mb-4 text-foreground">
                   Make Your Business <br className="hidden md:block" />
-                  Work <span className="text-blue-600">Smarter.</span>
+                  Work <span className="text-blue-600">Smarter</span>
                 </motion.h1>
 
                 <motion.p variants={fadeInUp} className="text-lg md:text-xl font-semibold text-foreground mb-6">
