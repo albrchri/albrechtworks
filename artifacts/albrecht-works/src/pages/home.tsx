@@ -441,8 +441,8 @@ export default function Home() {
                     },
                     {
                       step: "03",
-                      title: "Tell You What I'd Fix First",
-                      desc: "You'll receive a concise action plan showing the highest-value opportunities, what they could potentially save, and what I'd recommend doing next."
+                      title: "Build Your Action Plan",
+                      desc: "You'll get a clear, prioritized list of your highest-value fixes, estimated time and cost savings, and what to do next."
                     }
                   ].map((s, i) => (
                     <div key={i} className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-5">
