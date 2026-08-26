@@ -442,7 +442,7 @@ export default function Home() {
                     {
                       step: "03",
                       title: "Build Your Action Plan",
-                      desc: "You'll get a clear, prioritized list of your highest-value fixes, estimated time and cost savings, and what to do next."
+                      desc: "Within 3 business days, you'll get a prioritized list of your highest-value fixes, estimated savings, and next steps."
                     }
                   ].map((s, i) => (
                     <div key={i} className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-5">
@@ -522,7 +522,7 @@ export default function Home() {
                 
                 <motion.div variants={fadeInUp} className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
                   <p>
-                    With over 20 years of systems and technology leadership, I founded Albrecht Works to help local businesses modernize their practical operations without the complexity of enterprise software.
+                    With over 20 years of systems and technology leadership, I founded Albrecht Works to help local businesses modernize their workflow without the complexity of enterprise software.
                   </p>
                   <p>
                     I live in Libertyville with my wife and four kids. In my free time, you'll find me training for marathons, working the smoker, or coaching the local chess club.
