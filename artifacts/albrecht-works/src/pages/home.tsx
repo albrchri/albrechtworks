@@ -199,7 +199,7 @@ export default function Home() {
               >
                 <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border mb-6 md:mb-8 text-xs font-medium text-muted-foreground">
                   <MapPin size={14} className="text-primary" />
-                  <span>Based in Libertyville • Serving Lake County, the North Shore and greater Chicagoland</span>
+                  <span>Based in Libertyville • Serving Lake County, the North Shore and greater Chicagoland.</span>
                 </motion.div>
                 
                 <motion.h1 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold leading-[1.1] tracking-tight mb-4 text-foreground">
