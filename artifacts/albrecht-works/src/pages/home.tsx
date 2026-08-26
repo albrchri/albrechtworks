@@ -32,7 +32,7 @@ import { Textarea } from '@/components/ui/textarea';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Full Name is required'),
-  businessName: z.string().min(2, 'Business Name & Trade is required'),
+  businessName: z.string().min(2, 'Business Name is required'),
   email: z.string().email('Please enter a valid email address'),
   phone: z.string().optional(),
   message: z.string().optional(),
@@ -628,7 +628,7 @@ export default function Home() {
                 Let's Make Your Office Run <span className="text-blue-600 font-bold">Better.</span>
               </h2>
               <p className="text-lg text-muted-foreground">
-                Reach out directly to schedule an Operations Diagnostic or discuss your current workflow.
+                Reach out to schedule an Operations Diagnostic or discuss your current workflow.
               </p>
             </motion.div>
 
@@ -671,7 +671,7 @@ export default function Home() {
                         name="businessName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-foreground font-semibold">Business Name & Trade <span className="text-destructive">*</span></FormLabel>
+                            <FormLabel className="text-foreground font-semibold">Business Name <span className="text-destructive">*</span></FormLabel>
                             <FormControl>
                               <Input placeholder="Apex Plumbing" {...field} className="bg-white" />
                             </FormControl>
