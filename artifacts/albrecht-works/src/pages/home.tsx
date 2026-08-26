@@ -593,7 +593,7 @@ export default function Home() {
               className="text-center mb-12"
             >
               <h2 className="text-3xl md:text-4xl font-heading font-bold text-slate-900 mb-4">
-                Let's Make Your Office Run <span className="text-blue-600 font-bold">Better</span>
+                Let's Make Your Business Run <span className="text-blue-600 font-bold">Better</span>
               </h2>
               <p className="text-lg text-muted-foreground">
                 Reach out to schedule an Operations Diagnostic or discuss your current workflow.
