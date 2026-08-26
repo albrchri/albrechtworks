@@ -258,7 +258,7 @@ export default function Home() {
                     <div className="flex items-start justify-between gap-4 mb-8">
                       <div>
                         <h3 className="font-heading text-slate-900 font-bold text-base md:text-lg">
-                          Find the Bottlenecks.<br />Fix the System.
+                          Find the Bottlenecks<br />Fix the System
                         </h3>
                         <p className="text-sm text-muted-foreground mt-1">
                           I look across your workflows, software, and day-to-day processes to find where time, money, and opportunities are slipping away, and identify practical ways to improve them.
@@ -516,8 +516,8 @@ export default function Home() {
                 variants={staggerContainer}
               >
                 <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6 leading-tight">
-                  Technical Expertise.<br/>
-                   <span className="text-blue-600 font-bold">Practical Business Judgment.</span>
+                  Technical Expertise<br/>
+                   <span className="text-blue-600 font-bold">Practical Business Judgment</span>
                 </motion.h2>
                 
                 <motion.div variants={fadeInUp} className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
@@ -593,7 +593,7 @@ export default function Home() {
               className="text-center mb-12"
             >
               <h2 className="text-3xl md:text-4xl font-heading font-bold text-slate-900 mb-4">
-                Let's Make Your Office Run <span className="text-blue-600 font-bold">Better.</span>
+                Let's Make Your Office Run <span className="text-blue-600 font-bold">Better</span>
               </h2>
               <p className="text-lg text-muted-foreground">
                 Reach out to schedule an Operations Diagnostic or discuss your current workflow.
