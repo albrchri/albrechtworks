@@ -397,7 +397,7 @@ export default function Home() {
         </section>
 
         {/* The Diagnostic */}
-        <section id="diagnostic" className="py-24 bg-secondary px-4 md:px-6 border-y border-border">
+        <section id="diagnostic" className="py-16 bg-secondary px-4 md:px-6 border-y border-border">
           <div className="container mx-auto max-w-5xl">
             <motion.div 
               initial="hidden"
@@ -406,16 +406,16 @@ export default function Home() {
               variants={fadeInUp}
               className="bg-white rounded-2xl border-2 border-primary/20 shadow-xl overflow-hidden"
             >
-              <div className="p-8 md:p-12">
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
+              <div className="p-8 md:p-10">
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-6">
                   <div>
-                    <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider rounded-md mb-4 border border-primary/20">
+                    <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider rounded-md mb-3 border border-primary/20">
                       Fixed-Scope Entry Offer
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-4">
+                    <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-3">
                       The 90-Minute Operations <span className="text-blue-600">Diagnostic</span>
                     </h2>
-                    <p className="text-lg text-muted-foreground max-w-2xl mb-4">
+                    <p className="text-lg text-muted-foreground max-w-2xl">
                       I'll spend 90 minutes with you walking through how your business actually runs, from the first phone call, through scheduling and the job itself, to invoicing and getting paid. No prep required on your end.
                     </p>
                   </div>
@@ -427,7 +427,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                   {[
                     {
                       step: "01",
@@ -453,7 +453,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="bg-secondary p-6 rounded-xl border border-border mb-8 flex items-start gap-3 justify-center text-center md:text-left max-w-2xl mx-auto">
+                <div className="bg-secondary p-5 rounded-xl border border-border mb-6 flex items-start gap-3 w-full">
                   <Check className="text-primary shrink-0 mt-0.5" size={20} />
                   <div>
                     <span className="font-bold text-foreground block mb-1">Independent, Honest Assessment:</span>
