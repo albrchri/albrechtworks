@@ -349,8 +349,8 @@ export default function Home() {
                     {card.icon}
                   </div>
                   <h3 className="text-xl font-heading font-bold text-foreground mb-3">{card.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{card.desc}</p>
-                  <p className="text-sm text-muted-foreground/80 italic leading-relaxed mt-auto pt-4 border-t border-border">{card.example}</p>
+                  <p className="text-muted-foreground leading-relaxed min-h-[108px] md:min-h-[130px]">{card.desc}</p>
+                  <p className="text-sm text-muted-foreground/80 italic leading-relaxed pt-6 border-t border-border">{card.example}</p>
                 </motion.div>
               ))}
             </motion.div>
