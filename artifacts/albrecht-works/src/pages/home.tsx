@@ -207,6 +207,10 @@ export default function Home() {
                   Make Your Business <br className="hidden md:block" />
                   Work <span className="text-blue-600">Smarter.</span>
                 </motion.h1>
+
+                <motion.p variants={fadeInUp} className="text-lg md:text-xl font-semibold text-foreground mb-6">
+                  Fewer Missed Calls. Less Paperwork. More Jobs Closed.
+                </motion.p>
                 
                 <motion.p variants={fadeInUp} className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
                   I help local businesses save time, reduce busywork, and stop letting good customers and jobs fall through the cracks.
@@ -216,7 +220,7 @@ export default function Home() {
                 
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
                   <Button size="lg" className="w-full sm:w-auto text-base shadow-sm" onClick={() => scrollTo('diagnostic')}>
-                    Learn About the Diagnostic
+                    See How It Works
                   </Button>
                 </motion.div>
                 
@@ -269,7 +273,7 @@ export default function Home() {
                     <div className="space-y-3">
                       {[
                         { step: "01", title: "Identify", desc: "Find bottlenecks, duplicate work, missed handoffs, and wasted effort.", icon: Briefcase },
-                        { step: "02", title: "Recommend", desc: "Recommend practical process changes, tools, automation, and integrations that fit your business.", icon: Activity },
+                        { step: "02", title: "Recommend", desc: "Show you exactly what to fix in plain language.", icon: Activity },
                         { step: "03", title: "Prioritize", desc: "Separate the high-value opportunities from the nice-to-haves and give you a roadmap for what to fix first.", icon: LineChart },
                       ].map(({ step, title, desc, icon: Icon }, index) => (
                         <React.Fragment key={step}>
@@ -330,25 +334,29 @@ export default function Home() {
                 {
                   icon: <Clock size={24} />,
                   title: "Reduce Administrative Work",
-                  desc: "Automate repetitive data entry, paperwork, scheduling, and follow-up so your team spends less time on busywork."
+                  desc: "Automate repetitive data entry, paperwork, scheduling, and follow-up so your team spends less time on busywork.",
+                  example: "Ex: re-typing the same job info into your scheduling app, your invoicing software, and a spreadsheet."
                 },
                 {
                   icon: <Activity size={24} />,
                   title: "Capture More Opportunities",
-                  desc: "Reduce missed calls, slow response times, and forgotten estimates so fewer good opportunities fall through the cracks."
+                  desc: "Reduce missed calls, slow response times, and forgotten estimates so fewer good opportunities fall through the cracks.",
+                  example: "Ex: a potential customer who calls at 6pm, doesn't reach anyone, and calls your competitor instead."
                 },
                 {
                   icon: <Settings size={24} />,
                   title: "Make Your Technology Work Together",
-                  desc: "Get more value from the software you already use by reducing unnecessary manual handoffs between systems."
+                  desc: "Get more value from the software you already use by reducing unnecessary manual handoffs between systems.",
+                  example: "Ex: paying for two tools that do almost the same thing, because nobody had time to pick one."
                 }
               ].map((card, i) => (
-                <motion.div key={i} variants={fadeInUp} className="bg-white rounded-xl p-8 border border-border shadow-sm hover:shadow-md transition-shadow duration-300">
+                <motion.div key={i} variants={fadeInUp} className="bg-white rounded-xl p-8 border border-border shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
                   <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center text-primary mb-6 border border-border">
                     {card.icon}
                   </div>
                   <h3 className="text-xl font-heading font-bold text-foreground mb-3">{card.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">{card.desc}</p>
+                  <p className="text-sm text-muted-foreground/80 italic leading-relaxed mt-4 pt-4 border-t border-border">{card.example}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -417,12 +425,12 @@ export default function Home() {
                       Let's figure out what's slowing your business down.
                     </p>
                     <p className="text-lg text-muted-foreground max-w-2xl mb-4">
-                      I'll spend 90 minutes with you walking through how your business actually works—from the first customer call through scheduling, the work itself, invoicing and payment.
+                      I'll spend 90 minutes with you walking through how your business actually runs, from the first phone call, through scheduling and the job itself, to invoicing and getting paid. No prep required on your end.
                     </p>
                     <p className="text-lg text-muted-foreground max-w-2xl mb-3">
                       We'll look for things like:
                     </p>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 max-w-2xl">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
                       {[
                         "Repetitive data entry",
                         "Missed or slow customer follow-up",
@@ -432,8 +440,8 @@ export default function Home() {
                         "Simple tasks that could be automated",
                         "Other places where time, money or opportunities may be slipping away",
                       ].map((item, i) => (
-                        <li key={i} className="flex items-start gap-2 text-muted-foreground text-base">
-                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
+                        <li key={i} className="flex items-center gap-2.5 bg-secondary/60 border border-border rounded-lg px-3 py-2.5 text-sm text-foreground/90 leading-snug">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -495,7 +503,7 @@ export default function Home() {
 
                 <div className="text-center">
                   <Button size="lg" className="w-full md:w-auto text-lg px-8 shadow-md" onClick={() => scrollTo('contact')}>
-                    Schedule the Diagnostic
+                    Book the Diagnostic
                   </Button>
                 </div>
               </div>
