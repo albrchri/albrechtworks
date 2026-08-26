@@ -453,20 +453,11 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="bg-secondary p-6 rounded-xl border border-border mb-8 flex flex-col md:flex-row gap-6">
-                  <div className="flex items-start gap-3 flex-1">
-                    <Check className="text-primary shrink-0 mt-0.5" size={20} />
-                    <div>
-                      <span className="font-bold text-foreground block mb-1">Delivered within 3 business days:</span>
-                      <span className="text-sm text-muted-foreground">You receive a concise prioritized implementation roadmap.</span>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 flex-1">
-                    <Check className="text-primary shrink-0 mt-0.5" size={20} />
-                    <div>
-                      <span className="font-bold text-foreground block mb-1">Independent, Honest Assessment:</span>
-                      <span className="text-sm text-muted-foreground">Straightforward recommendations with zero software kickbacks or vendor agendas. If a tool works, I leave it alone.</span>
-                    </div>
+                <div className="bg-secondary p-6 rounded-xl border border-border mb-8 flex items-start gap-3 justify-center text-center md:text-left max-w-2xl mx-auto">
+                  <Check className="text-primary shrink-0 mt-0.5" size={20} />
+                  <div>
+                    <span className="font-bold text-foreground block mb-1">Independent, Honest Assessment:</span>
+                    <span className="text-sm text-muted-foreground">Straightforward recommendations with zero software kickbacks or vendor agendas. If a tool works, I leave it alone.</span>
                   </div>
                 </div>
 
