@@ -364,9 +364,13 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
             >
-              <motion.h2 variants={fadeInUp} className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-10">
-                Built for Businesses Like Yours
+              <motion.h2 variants={fadeInUp} className="text-2xl md:text-3xl font-heading font-bold text-foreground mb-6">
+                Built for Businesses Like <span className="text-blue-600">Yours</span>
               </motion.h2>
+
+              <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-10">
+                I work well with businesses that run on phone calls, schedules, estimates, invoices and a handful of software tools.
+              </motion.p>
               
               <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-3 mb-10">
                 {[
@@ -384,7 +388,7 @@ export default function Home() {
               </motion.div>
               
               <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                 If your business runs on phone calls, schedules, estimates, invoices, and a handful of software tools, there is often room to make the process work better.
+                You don't need a massive technology upgrade. You need to know what is wasting time, what is costing you money, and what is worth fixing first.
               </motion.p>
             </motion.div>
           </div>
