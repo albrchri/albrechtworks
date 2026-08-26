@@ -272,8 +272,8 @@ export default function Home() {
                     <div className="space-y-3">
                       {[
                         { step: "01", title: "Identify", desc: "Find bottlenecks, duplicate work, missed handoffs, and wasted effort.", icon: Briefcase },
-                        { step: "02", title: "Recommend", desc: "Show you exactly what to fix in plain language.", icon: Activity },
-                        { step: "03", title: "Prioritize", desc: "Separate the high-value opportunities from the nice-to-haves and give you a roadmap for what to fix first.", icon: LineChart },
+                        { step: "02", title: "Recommend", desc: "Provide practical, straightforward fixes explained in clear language.", icon: Activity },
+                        { step: "03", title: "Prioritize", desc: "Separate high-impact quick wins from nice-to-haves so you know what to fix first.", icon: LineChart },
                       ].map(({ step, title, desc, icon: Icon }, index) => (
                         <React.Fragment key={step}>
                           <div className="flex items-center gap-4 rounded-xl bg-white/80 border border-border/80 px-4 py-4 shadow-sm">
