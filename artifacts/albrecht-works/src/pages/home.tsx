@@ -412,12 +412,9 @@ export default function Home() {
                     <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider rounded-md mb-4 border border-primary/20">
                       Fixed-Scope Entry Offer
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-2">
-                      The 90-Minute Operations Diagnostic
+                    <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-4">
+                      The 90-Minute Operations <span className="text-blue-600">Diagnostic</span>
                     </h2>
-                    <p className="text-base font-semibold text-primary mb-4">
-                      Let's figure out what's slowing your business down.
-                    </p>
                     <p className="text-lg text-muted-foreground max-w-2xl mb-4">
                       I'll spend 90 minutes with you walking through how your business actually runs, from the first phone call, through scheduling and the job itself, to invoicing and getting paid. No prep required on your end.
                     </p>
