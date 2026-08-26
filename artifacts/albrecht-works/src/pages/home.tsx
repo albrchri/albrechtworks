@@ -427,25 +427,6 @@ export default function Home() {
                     <p className="text-lg text-muted-foreground max-w-2xl mb-4">
                       I'll spend 90 minutes with you walking through how your business actually runs, from the first phone call, through scheduling and the job itself, to invoicing and getting paid. No prep required on your end.
                     </p>
-                    <p className="text-lg text-muted-foreground max-w-2xl mb-3">
-                      We'll look for things like:
-                    </p>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
-                      {[
-                        "Repetitive data entry",
-                        "Missed or slow customer follow-up",
-                        "Manual scheduling and reminders",
-                        "Information being entered into multiple systems",
-                        "Software your team isn't getting much value from",
-                        "Simple tasks that could be automated",
-                        "Other places where time, money or opportunities may be slipping away",
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-center gap-2.5 bg-secondary/60 border border-border rounded-lg px-3 py-2.5 text-sm text-foreground/90 leading-snug">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0"></span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
                   <div className="shrink-0 bg-secondary px-6 py-4 rounded-xl border border-border text-center">
                     <div className="text-3xl font-heading font-extrabold text-foreground">$495</div>
