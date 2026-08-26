@@ -327,19 +327,19 @@ export default function Home() {
               {[
                 {
                   icon: <Clock size={24} />,
-                  title: "Manual Busywork & Data Entry",
+                  title: "Manual Busywork",
                   desc: "Re-entering job details, juggling paper notes, and manually updating schedules takes hours away from actual revenue-generating work.",
                   example: "Ex: Re-typing the same customer info into your scheduling app, your invoicing tool, and a spreadsheet."
                 },
                 {
                   icon: <Activity size={24} />,
-                  title: "Dropped Leads & Slow Follow-Up",
+                  title: "Dropped Leads",
                   desc: "Missed calls, delayed quotes, and forgotten estimates mean good jobs slip away to competitors who respond first.",
                   example: "Ex: A customer calls after hours, gets voicemail, and books with the next shop on Google."
                 },
                 {
                   icon: <Settings size={24} />,
-                  title: "Disconnected Software & Silos",
+                  title: "Disconnected Software",
                   desc: "Paying for apps that don't talk to each other forces your team into slow, manual handoffs and duplicate tools.",
                   example: "Ex: Paying for multiple tools that overlap because nobody had the time to connect them."
                 }
