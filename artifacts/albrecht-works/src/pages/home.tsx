@@ -437,7 +437,7 @@ export default function Home() {
                     {
                       step: "02",
                       title: "Find the Waste",
-                      desc: "I'll look for duplicate work, manual steps, missed handoffs and other things that make the business harder to run than it needs to be."
+                      desc: "I'll look for duplicate work, manual steps, missed handoffs, and pain points that slow your business down."
                     },
                     {
                       step: "03",
