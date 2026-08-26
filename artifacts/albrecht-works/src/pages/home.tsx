@@ -427,9 +427,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                <h3 className="font-heading font-bold text-lg text-foreground mb-4">
-                  Here's how it works
-                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
                   {[
                     {
