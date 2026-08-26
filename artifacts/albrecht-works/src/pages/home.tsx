@@ -200,20 +200,18 @@ export default function Home() {
               >
                 <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border mb-6 md:mb-8 text-xs font-medium text-muted-foreground">
                   <MapPin size={14} className="text-primary" />
-                  <span>Based in Libertyville • Serving Lake County, the North Shore & Beyond</span>
+                  <span>Based in Libertyville • Serving Lake County, the North Shore and greater Chicagoland.</span>
                 </motion.div>
                 
                 <motion.h1 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold leading-[1.1] tracking-tight mb-4 text-foreground">
                   Make Your Business <br className="hidden md:block" />
-                  Work Smarter.
+                  Work <span className="text-blue-600">Smarter.</span>
                 </motion.h1>
                 
-                <motion.div variants={fadeInUp} className="text-lg md:text-xl font-medium text-primary mb-6">
-                  Streamlined Workflows • Integrated Software • Practical Automation
-                </motion.div>
-                
                 <motion.p variants={fadeInUp} className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-                  I help local businesses cut repetitive administrative work, improve customer follow-up, and connect separate systems so they get more value from the technology already in place.
+                  I help local businesses save time, reduce busywork, and stop letting good customers and jobs fall through the cracks.
+                  <br /><br />
+                  That might mean eliminating duplicate data entry, following up with estimates automatically, capturing missed calls, simplifying scheduling, or getting the software you already pay for working together.
                 </motion.p>
                 
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
@@ -257,22 +255,22 @@ export default function Home() {
                     <div className="flex items-start justify-between gap-4 mb-8">
                       <div>
                         <h3 className="font-heading text-slate-900 font-bold text-base md:text-lg">
-                          From Friction to Flow
+                          Find the Bottlenecks. Fix the System.
                         </h3>
                         <p className="text-sm text-muted-foreground mt-1">
-                          Eliminating bottlenecks across your workflow.
+                          I look across your workflows, software, and day-to-day processes to find where time, money, and opportunities are slipping away, and identify practical ways to improve them.
                         </p>
                       </div>
-                      <div className="bg-blue-50 text-blue-600 p-2 rounded-xl flex items-center justify-center">
+                      <div className="bg-blue-50 text-blue-600 p-2 rounded-xl flex items-center justify-center shrink-0">
                         <Workflow size={20} />
                       </div>
                     </div>
 
                     <div className="space-y-3">
                       {[
-                        { step: "01", title: "Intake", desc: "Capture leads and project details cleanly", icon: Briefcase },
-                        { step: "02", title: "Streamline", desc: "Move work between systems seamlessly", icon: Activity },
-                        { step: "03", title: "Completion", desc: "Close out jobs and follow up with confidence", icon: LineChart },
+                        { step: "01", title: "Identify", desc: "Find bottlenecks, duplicate work, missed handoffs, and wasted effort.", icon: Briefcase },
+                        { step: "02", title: "Recommend", desc: "Recommend practical process changes, tools, automation, and integrations that fit your business.", icon: Activity },
+                        { step: "03", title: "Prioritize", desc: "Separate the high-value opportunities from the nice-to-haves and give you a roadmap for what to fix first.", icon: LineChart },
                       ].map(({ step, title, desc, icon: Icon }, index) => (
                         <React.Fragment key={step}>
                           <div className="flex items-center gap-4 rounded-xl bg-white/80 border border-border/80 px-4 py-4 shadow-sm">
