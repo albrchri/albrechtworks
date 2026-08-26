@@ -595,7 +595,7 @@ export default function Home() {
                 },
                 {
                   title: "No AI Hype",
-                  desc: "We only recommend automation when it solves a real operational problem and saves actual time or money."
+                  desc: "I only recommend automation when it solves a real operational problem and saves actual time or money."
                 },
                 {
                   title: "Direct Access",
