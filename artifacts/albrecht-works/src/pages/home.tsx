@@ -13,7 +13,7 @@ import {
   Activity, 
   LineChart, 
   SearchCheck,
-  GitMerge,
+  SlidersHorizontal,
   ListChecks,
   Settings, 
   User, 
@@ -275,7 +275,7 @@ export default function Home() {
                     <div className="space-y-3">
                       {[
                         { step: "01", title: "Review", desc: "Walk through how your business runs to pinpoint friction and key pain points.", icon: SearchCheck },
-                        { step: "02", title: "Simplify", desc: "Map out practical ways to remove duplicate tasks and connect your tools.", icon: GitMerge },
+                        { step: "02", title: "Simplify", desc: "Map out practical ways to remove duplicate tasks and connect your tools.", icon: SlidersHorizontal },
                         { step: "03", title: "Deliver", desc: "Provide a clear, prioritized action plan you or your team can execute.", icon: ListChecks },
                       ].map(({ step, title, desc, icon: Icon }, index) => (
                         <React.Fragment key={step}>
