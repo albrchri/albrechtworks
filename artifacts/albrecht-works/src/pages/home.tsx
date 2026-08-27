@@ -331,20 +331,20 @@ export default function Home() {
                 {
                   icon: <Clock size={24} />,
                   title: "Manual Busywork",
-                  desc: "Re-entering job details, juggling paper notes, and manually updating schedules takes hours away from actual revenue-generating work.",
-                  example: "Ex: Re-typing the same customer info into your scheduling app, your invoicing tool, and a spreadsheet."
+                  desc: "Re-entering job details, juggling paper notes, and manually updating schedules take hours away from actual revenue-generating work.",
+                  example: "Ex: Re-typing customer notes into your scheduling app, copying job details into QuickBooks, or tracking jobs in spreadsheets."
                 },
                 {
                   icon: <Activity size={24} />,
                   title: "Dropped Leads",
-                  desc: "Missed calls, delayed quotes, and forgotten estimates mean good jobs slip away to competitors who respond first.",
+                  desc: "Missed calls, delayed quotes, and uncalled estimates mean good jobs slip away to competitors who respond first.",
                   example: "Ex: A customer calls after hours, gets voicemail, and books with the next shop on Google."
                 },
                 {
                   icon: <Settings size={24} />,
                   title: "Disconnected Software",
-                  desc: "Paying for apps that don't talk to each other forces your team into slow, manual handoffs and duplicate tools.",
-                  example: "Ex: Paying for multiple tools that overlap because nobody had the time to connect them."
+                  desc: "Apps that don't talk to each other force your team into slow, manual handoffs and duplicate steps.",
+                  example: "Ex: Your scheduling app, job tracker, and accounting software each hold disconnected pieces of the same customer."
                 }
               ].map((card, i) => (
                 <motion.div key={i} variants={fadeInUp} className="bg-white rounded-xl p-8 border border-border shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
