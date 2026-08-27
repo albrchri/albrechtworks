@@ -468,7 +468,7 @@ export default function Home() {
                     Book the Diagnostic
                   </Button>
                   <p className="mt-4 text-xs text-slate-500 font-medium">
-                    ✓ 100% Independent Assessment • Zero Software Kickbacks • No Vendor Agendas • If a tool works, I leave it alone.
+                    ✓ 100% Independent assessment • No software kickbacks • If a tool works, I leave it alone.
                   </p>
                 </div>
               </div>
