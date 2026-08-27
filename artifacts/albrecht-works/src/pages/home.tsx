@@ -430,16 +430,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="bg-blue-50/40 p-5 rounded-xl border border-blue-100/80 mb-6 w-full">
-                  <h3 className="text-sm font-bold text-slate-900 mb-1.5">Why this can be a smart investment</h3>
-                  <p className="text-sm md:text-base font-semibold text-slate-700 leading-relaxed">
-                    A single fix can cut wasteful expenses, book more jobs, or save hours on routine tasks.
-                  </p>
-                  <p className="text-sm text-slate-600 leading-relaxed mt-1.5">
-                    Finding just one typically covers the one-time diagnostic and keeps paying off month after month.
-                  </p>
-                </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                   {[
                     {
@@ -464,6 +454,13 @@ export default function Home() {
                       <p className="text-slate-600 text-sm leading-relaxed">{s.desc}</p>
                     </div>
                   ))}
+                </div>
+
+                <div className="bg-slate-50/70 p-5 rounded-xl border border-slate-200/80 my-4 w-full">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    <span className="font-bold text-foreground">Why it pays for itself:</span>{" "}
+                    A single fix can cut wasteful expenses, book more jobs, or save hours on routine tasks. Finding just one typically covers the one-time diagnostic and keeps paying off month after month.
+                  </p>
                 </div>
 
                 <div className="text-center">
