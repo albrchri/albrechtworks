@@ -275,13 +275,13 @@ export default function Home() {
                     <div className="space-y-3">
                       {[
                         { step: "01", title: "Review", desc: "Walk through how your business runs to pinpoint friction and key pain points.", icon: SearchCheck },
-                        { step: "02", title: "Simplify", desc: "Map out practical ways to remove duplicate tasks and connect your tools.", icon: Merge },
+                        { step: "02", title: "Simplify", desc: "Map out practical ways to remove duplicate tasks and connect your tools.", icon: Merge, iconClassName: "rotate-90" },
                         { step: "03", title: "Deliver", desc: "Provide a clear, prioritized action plan you or your team can execute.", icon: ListChecks },
-                      ].map(({ step, title, desc, icon: Icon }, index) => (
+                      ].map(({ step, title, desc, icon: Icon, iconClassName }, index) => (
                         <React.Fragment key={step}>
                           <div className="flex items-center gap-4 rounded-xl bg-white/80 border border-border/80 px-4 py-4 shadow-sm">
                             <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10 text-primary shrink-0">
-                              <Icon size={17} />
+                              <Icon size={17} className={iconClassName} />
                             </div>
                             <div className="min-w-0">
                               <div className="flex items-center gap-2">
