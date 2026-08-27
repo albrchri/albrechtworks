@@ -456,7 +456,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="bg-blue-50 py-5 px-5 rounded-r-lg rounded-l-none border-l-4 border-primary border-t-0 border-r-0 border-b-0 my-4 w-full">
+                <div className="bg-blue-50 py-5 px-5 rounded-r-lg rounded-l-none border-l-4 border-primary border-t-0 border-r-0 border-b-0 my-4 w-full self-stretch mx-0">
                   <p className="text-base text-muted-foreground leading-relaxed">
                     <span className="font-bold text-foreground">Why it pays for itself:</span>{" "}
                     A single fix can cut wasteful expenses, book more jobs, or save hours on routine tasks. Finding just one typically covers the one-time diagnostic and keeps paying off month after month.
