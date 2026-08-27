@@ -464,9 +464,8 @@ export default function Home() {
                   <Button size="lg" className="w-full md:w-auto text-lg px-8 shadow-md" onClick={() => scrollTo('contact')}>
                     Book the Diagnostic
                   </Button>
-                  <p className="mt-4 text-sm text-muted-foreground">
-                    <span className="font-bold text-foreground">Independent, Honest Assessment:</span>{" "}
-                    Straightforward recommendations with zero software kickbacks or vendor agendas. If a tool works, I leave it alone.
+                  <p className="mt-4 text-xs text-slate-500 font-medium">
+                    ✓ 100% Independent Assessment • Zero Software Kickbacks • No Vendor Agendas
                   </p>
                 </div>
               </div>
