@@ -628,7 +628,7 @@ export default function Home() {
                           <FormItem>
                             <FormLabel className="text-foreground font-semibold">Full Name <span className="text-destructive">*</span></FormLabel>
                             <FormControl>
-                              <Input placeholder="Jane Doe" {...field} className="bg-white" />
+                              <Input placeholder="John Doe" {...field} className="bg-white" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -657,7 +657,7 @@ export default function Home() {
                           <FormItem>
                             <FormLabel className="text-foreground font-semibold">Email Address <span className="text-destructive">*</span></FormLabel>
                             <FormControl>
-                              <Input type="email" placeholder="jane@example.com" {...field} className="bg-white" />
+                              <Input type="email" placeholder="john@example.com" {...field} className="bg-white" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -670,7 +670,7 @@ export default function Home() {
                           <FormItem>
                             <FormLabel className="text-foreground font-semibold">Phone Number (Optional)</FormLabel>
                             <FormControl>
-                              <Input type="tel" placeholder="(555) 123-4567" {...field} className="bg-white" />
+                              <Input type="tel" placeholder="(847) 123-4567" {...field} className="bg-white" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -750,7 +750,7 @@ export default function Home() {
           </div>
           
           <div className="border-t border-slate-800 mt-8 pt-8 text-center text-sm text-slate-500">
-            © 2026 Albrecht Works LLC. All rights reserved.
+            © 2026 Albrecht Works. All rights reserved.
           </div>
         </div>
       </footer>
