@@ -453,25 +453,21 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="bg-blue-50/60 p-5 rounded-xl border border-blue-100 my-4 w-full">
+                <div className="bg-slate-50/70 p-5 rounded-xl border border-slate-200/80 my-4 w-full">
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     <span className="font-bold text-foreground">Why it pays for itself:</span>{" "}
                     A single fix can cut wasteful expenses, book more jobs, or save hours on routine tasks. Finding just one typically covers the one-time diagnostic and keeps paying off month after month.
                   </p>
                 </div>
 
-                <div className="bg-secondary p-5 rounded-xl border border-border mb-6 flex items-start gap-3 w-full">
-                  <Check className="text-primary shrink-0 mt-0.5" size={20} />
-                  <div>
-                    <span className="font-bold text-foreground block mb-1">Independent, Honest Assessment:</span>
-                    <span className="text-sm text-muted-foreground">Straightforward recommendations with zero software kickbacks or vendor agendas. If a tool works, I leave it alone.</span>
-                  </div>
-                </div>
-
                 <div className="text-center">
                   <Button size="lg" className="w-full md:w-auto text-lg px-8 shadow-md" onClick={() => scrollTo('contact')}>
                     Book the Diagnostic
                   </Button>
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    <span className="font-bold text-foreground">Independent, Honest Assessment:</span>{" "}
+                    Straightforward recommendations with zero software kickbacks or vendor agendas. If a tool works, I leave it alone.
+                  </p>
                 </div>
               </div>
             </motion.div>
