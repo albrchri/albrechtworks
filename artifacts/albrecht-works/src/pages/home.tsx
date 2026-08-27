@@ -337,7 +337,7 @@ export default function Home() {
                 {
                   icon: <Activity size={24} />,
                   title: "Dropped Leads",
-                  desc: "Missed calls, delayed quotes, and uncalled estimates mean good jobs slip away to competitors who respond first.",
+                  desc: "Missed calls, delayed quotes, and forgotten estimates mean good jobs slip away to competitors who respond first.",
                   example: "Ex: A customer calls after hours, gets voicemail, and books with the next shop on Google."
                 },
                 {
