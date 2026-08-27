@@ -453,6 +453,13 @@ export default function Home() {
                   ))}
                 </div>
 
+                <div className="bg-blue-50/60 p-5 rounded-xl border border-blue-100 my-4 w-full">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    <span className="font-bold text-foreground">Why it pays for itself:</span>{" "}
+                    A single fix can cut wasteful expenses, book more jobs, or save hours on routine tasks. Finding just one typically covers the one-time diagnostic and keeps paying off month after month.
+                  </p>
+                </div>
+
                 <div className="bg-secondary p-5 rounded-xl border border-border mb-6 flex items-start gap-3 w-full">
                   <Check className="text-primary shrink-0 mt-0.5" size={20} />
                   <div>
