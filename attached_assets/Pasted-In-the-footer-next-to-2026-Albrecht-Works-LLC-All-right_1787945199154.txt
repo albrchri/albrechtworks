@@ -1,0 +1,23 @@
+In the footer, next to "© 2026 Albrecht Works LLC. All rights reserved," add a text link labeled "Privacy Policy."
+Clicking this link should open a modal/overlay window on top of the current page, it should not navigate to a new URL or page. The modal should have a semi-transparent dark background behind it, a white content box centered on screen with the policy text inside, scrollable if the content is taller than the viewport, and a close button (an X in the top right of the box) that dismisses the modal and returns to the page underneath. Clicking outside the box should also close it.
+Use this text as the content of the modal:
+________________________________________
+Privacy Policy
+Last updated: [insert current date]
+Albrecht Works LLC ("Albrecht Works," "I," "me," or "my") respects your privacy. This policy explains what information I collect through this website and how it's used.
+Information I Collect
+When you submit the contact form on this site, I collect the information you provide, which may include your name, business name, email address, phone number, and any details you share about your business needs.
+If you schedule and pay for the Operations Diagnostic, payment is processed securely by Stripe. I do not collect or store your full payment card information, Stripe handles that directly under its own privacy and security practices.
+How I Use This Information
+I use the information you provide solely to respond to your inquiry, schedule and deliver the Operations Diagnostic, and communicate with you about your engagement with Albrecht Works. I do not sell, rent, or share your personal information with third parties for marketing purposes.
+Data Retention
+I retain client information only as long as needed to provide services and maintain basic business records, such as for tax and accounting purposes.
+Third-Party Services
+This site may use third-party services for payment processing (Stripe) and scheduling. These providers have their own privacy policies governing how they handle your information.
+Your Rights
+You may contact me at any time to ask what information I have on file, request corrections, or request that your information be deleted, subject to any recordkeeping requirements I'm legally obligated to maintain.
+Contact
+Questions about this policy can be sent to chris@albrechtworks.com.
+________________________________________
+Style the modal to match the site's existing card aesthetic, white background, the same border-radius and font used elsewhere on the page, so it doesn't look like a generic browser popup.
+
