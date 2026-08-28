@@ -3,8 +3,8 @@ name: Playwright browser runtime
 description: Local Chromium dependencies can be missing even when Playwright is installed.
 ---
 
-When adding browser checks, validate the user-facing flow with the browser testing environment even if local Playwright cannot launch because the container lacks native Chromium libraries.
+On Replit, install Playwright browser binaries with `playwright install chromium` and provide Chromium's native runtime libraries through Nix. Do not use Playwright's `--with-deps` option.
 
-**Why:** Playwright's npm package and browser download do not guarantee that every Linux runtime library is available in the shell environment; installing system dependencies can also mutate project configuration.
+**Why:** `--with-deps` attempts an apt/sudo install that Replit blocks. Downloading Chromium alone is also insufficient when libraries such as GLib or libgbm are absent.
 
-**How to apply:** Keep the committed test independent of temporary container setup, use the configured browser tester for end-to-end verification, and clean up any temporary runtime configuration before finishing.
+**How to apply:** For release browser checks, commit the required Nix packages as workspace system dependencies, download the Playwright-managed Chromium build in the release test command, and verify that exact registered validation command.

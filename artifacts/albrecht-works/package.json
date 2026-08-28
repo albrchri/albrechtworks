@@ -8,6 +8,7 @@
     "build": "vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "test:e2e": "playwright test",
+    "test:e2e:release": "playwright install chromium && pnpm run test:e2e",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
