@@ -729,7 +729,7 @@ export default function Home() {
               className="text-center mt-8 text-sm text-muted-foreground flex items-center justify-center gap-2"
             >
               <Mail size={16} />
-               Prefer direct email? Reach out anytime at <a href="mailto:chris@albrechtworks.com" className="font-medium text-primary">chris@albrechtworks.com</a>
+               Prefer direct email? Reach out anytime at <a href="mailto:chris@albrechtworks.com?subject=Albrecht%20Works%20website%20inquiry" className="font-medium text-primary">chris@albrechtworks.com</a>
             </motion.div>
           </div>
         </section>
