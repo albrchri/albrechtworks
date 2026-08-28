@@ -276,11 +276,14 @@ export default function Home() {
                   Fewer Missed Calls. Less Paperwork. More Jobs Closed.
                 </motion.p>
 
-                <motion.p variants={fadeInUp} className="text-lg text-muted-foreground leading-relaxed mb-6 max-w-2xl">
-                  I help local businesses save time, reduce busywork, and stop letting good customers and jobs fall through the cracks.
-                  <br /><br />
-                  That might mean eliminating duplicate data entry, following up with estimates automatically, capturing missed calls, simplifying scheduling, or getting the software you already pay for working together.
-                </motion.p>
+                <motion.div variants={fadeInUp} className="space-y-6 mb-6 max-w-2xl">
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    I help local businesses save time, reduce busywork, and stop letting good customers and jobs fall through the cracks.
+                  </p>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    That might mean eliminating duplicate data entry, following up with estimates automatically, capturing missed calls, simplifying scheduling, or getting the software you already pay for working together.
+                  </p>
+                </motion.div>
 
                 <motion.div variants={fadeInUp} className="py-0 pl-[18px] pr-0 border-l-4 border-primary mb-8 w-full max-w-2xl">
                   <p className="text-lg text-muted-foreground leading-relaxed">
