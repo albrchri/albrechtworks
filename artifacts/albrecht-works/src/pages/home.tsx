@@ -275,6 +275,10 @@ export default function Home() {
                 <motion.p variants={fadeInUp} className="text-lg md:text-xl font-semibold text-foreground mb-6">
                   Fewer Missed Calls. Less Paperwork. More Jobs Closed.
                 </motion.p>
+
+                <motion.p variants={fadeInUp} className="text-lg md:text-xl font-semibold text-foreground mb-6">
+                  The goal is simple: find ways to save you money, help you win more business, or both.
+                </motion.p>
                 
                 <motion.p variants={fadeInUp} className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
                   I help local businesses save time, reduce busywork, and stop letting good customers and jobs fall through the cracks.
