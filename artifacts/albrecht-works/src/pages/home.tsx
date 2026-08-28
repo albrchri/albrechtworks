@@ -276,15 +276,18 @@ export default function Home() {
                   Fewer Missed Calls. Less Paperwork. More Jobs Closed.
                 </motion.p>
 
-                <motion.p variants={fadeInUp} className="text-lg md:text-xl font-semibold text-foreground mb-6">
-                  The goal is simple: find ways to save you money, help you win more business, or both.
-                </motion.p>
-                
-                <motion.p variants={fadeInUp} className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+                <motion.p variants={fadeInUp} className="text-lg text-muted-foreground leading-relaxed mb-6 max-w-2xl">
                   I help local businesses save time, reduce busywork, and stop letting good customers and jobs fall through the cracks.
                   <br /><br />
                   That might mean eliminating duplicate data entry, following up with estimates automatically, capturing missed calls, simplifying scheduling, or getting the software you already pay for working together.
                 </motion.p>
+
+                <motion.div variants={fadeInUp} className="bg-blue-50 py-4 px-5 rounded-r-lg border-l-4 border-primary mb-8 w-full max-w-2xl">
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    <span className="font-bold text-foreground">The goal is simple:</span>{" "}
+                    find ways to save you money, help you win more business, or both.
+                  </p>
+                </motion.div>
                 
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
                   <Button size="lg" className="w-full sm:w-auto text-base shadow-sm" onClick={() => scrollTo('diagnostic')}>
