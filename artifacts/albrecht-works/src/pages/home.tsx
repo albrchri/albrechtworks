@@ -467,9 +467,6 @@ export default function Home() {
                   <Button size="lg" className="w-full md:w-auto text-lg px-8 shadow-md" onClick={() => scrollTo('contact')}>
                     Book the Diagnostic
                   </Button>
-                  <p className="mt-4 text-xs text-slate-500 font-medium">
-                    ✓ 100% Independent assessment • No software kickbacks • If a tool works, I leave it alone.
-                  </p>
                 </div>
               </div>
             </motion.div>
@@ -564,15 +561,15 @@ export default function Home() {
               {[
                 {
                   title: "No Vendor Agenda",
-                  desc: "I don't work for software vendors or resell software. Recommendations are based solely on what fits your business."
+                  desc: "I don't work for software vendors or resell software. My recommendations are based only on what fits your business, and if a tool you already use is working, I leave it alone."
                 },
                 {
                   title: "No AI Hype",
-                  desc: "I only recommend automation when it solves a real operational problem and saves actual time or money."
+                  desc: "I only recommend automation when it solves a real problem and saves actual time or money. Independent assessment first, technology second, not the other way around."
                 },
                 {
                   title: "Direct Access",
-                  desc: "You work directly with me from start to finish on every stage of your project."
+                  desc: "You work directly with me from start to finish on every stage of your project. No account managers, no hand-offs to a junior team member, just me."
                 }
               ].map((card, i) => (
                 <motion.div key={i} variants={fadeInUp} className="bg-white p-8 rounded-xl border border-border text-center shadow-sm">
