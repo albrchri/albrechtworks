@@ -62,6 +62,7 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [privacyPolicyOpen, setPrivacyPolicyOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,6 +71,24 @@ export default function Home() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!privacyPolicyOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setPrivacyPolicyOpen(false);
+      }
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [privacyPolicyOpen]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -752,10 +771,104 @@ export default function Home() {
           </div>
           
           <div className="border-t border-slate-800 mt-8 pt-8 text-center text-sm text-slate-500">
-            © 2026 Albrecht Works LLC. All rights reserved.
+            <span>© 2026 Albrecht Works LLC. All rights reserved.</span>
+            <span className="mx-2" aria-hidden="true">•</span>
+            <button
+              type="button"
+              className="text-slate-400 underline underline-offset-4 transition-colors hover:text-white"
+              onClick={() => setPrivacyPolicyOpen(true)}
+            >
+              Privacy Policy
+            </button>
           </div>
         </div>
       </footer>
+
+      {privacyPolicyOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm"
+          role="presentation"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setPrivacyPolicyOpen(false);
+            }
+          }}
+        >
+          <div
+            className="relative max-h-[calc(100vh-2rem)] w-full max-w-3xl overflow-y-auto rounded-2xl border border-border bg-white p-6 shadow-2xl md:p-10"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="privacy-policy-title"
+          >
+            <button
+              type="button"
+              aria-label="Close Privacy Policy"
+              className="absolute right-4 top-4 rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              onClick={() => setPrivacyPolicyOpen(false)}
+            >
+              <X size={20} />
+            </button>
+
+            <div className="pr-8">
+              <h2 id="privacy-policy-title" className="font-heading text-3xl font-bold text-foreground">
+                Privacy Policy
+              </h2>
+              <p className="mt-2 text-sm text-muted-foreground">Last updated: August 28, 2026</p>
+
+              <div className="mt-8 space-y-6 text-sm leading-relaxed text-muted-foreground">
+                <p>
+                  Albrecht Works LLC (&quot;Albrecht Works,&quot; &quot;I,&quot; &quot;me,&quot; or &quot;my&quot;) respects your privacy. This policy explains what information I collect through this website and how it&apos;s used.
+                </p>
+
+                <section>
+                  <h3 className="mb-2 text-lg font-bold text-foreground">Information I Collect</h3>
+                  <p>
+                    When you submit the contact form on this site, I collect the information you provide, which may include your name, business name, email address, phone number, and any details you share about your business needs.
+                  </p>
+                  <p className="mt-3">
+                    If you schedule and pay for the Operations Diagnostic, payment is processed securely by Stripe. I do not collect or store your full payment card information, Stripe handles that directly under its own privacy and security practices.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="mb-2 text-lg font-bold text-foreground">How I Use This Information</h3>
+                  <p>
+                    I use the information you provide solely to respond to your inquiry, schedule and deliver the Operations Diagnostic, and communicate with you about your engagement with Albrecht Works. I do not sell, rent, or share your personal information with third parties for marketing purposes.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="mb-2 text-lg font-bold text-foreground">Data Retention</h3>
+                  <p>
+                    I retain client information only as long as needed to provide services and maintain basic business records, such as for tax and accounting purposes.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="mb-2 text-lg font-bold text-foreground">Third-Party Services</h3>
+                  <p>
+                    This site may use third-party services for payment processing (Stripe) and scheduling. These providers have their own privacy policies governing how they handle your information.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="mb-2 text-lg font-bold text-foreground">Your Rights</h3>
+                  <p>
+                    You may contact me at any time to ask what information I have on file, request corrections, or request that your information be deleted, subject to any recordkeeping requirements I&apos;m legally obligated to maintain.
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="mb-2 text-lg font-bold text-foreground">Contact</h3>
+                  <p>
+                    Questions about this policy can be sent to <a href="mailto:chris@albrechtworks.com?subject=Albrecht%20Works%20privacy%20policy%20question" className="font-medium text-primary underline underline-offset-4">chris@albrechtworks.com</a>.
+                  </p>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
