@@ -282,8 +282,8 @@ export default function Home() {
                   That might mean eliminating duplicate data entry, following up with estimates automatically, capturing missed calls, simplifying scheduling, or getting the software you already pay for working together.
                 </motion.p>
 
-                <motion.div variants={fadeInUp} className="py-4 pl-[18px] pr-0 border-l-4 border-primary mb-8 w-full max-w-2xl">
-                  <p className="text-base text-muted-foreground leading-relaxed">
+                <motion.div variants={fadeInUp} className="py-0 pl-[18px] pr-0 border-l-4 border-primary mb-8 w-full max-w-2xl">
+                  <p className="text-lg text-muted-foreground leading-relaxed">
                     <span className="font-bold text-foreground">The goal is simple:</span>{" "}
                     find ways to save you money, help you win more business, or both.
                   </p>
