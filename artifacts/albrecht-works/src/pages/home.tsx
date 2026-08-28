@@ -56,6 +56,49 @@ const staggerContainer = {
   }
 };
 
+const formatPhoneDigits = (value: string) => {
+  const digits = value.replace(/\D/g, '').slice(0, 10);
+
+  if (digits.length === 0) return '';
+  if (digits.length <= 2) return `(${digits}`;
+  if (digits.length === 3) return `(${digits}) `;
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+};
+
+const formatPhoneInput = (value: string, previousValue: string) => {
+  const previousDigits = previousValue.replace(/\D/g, '');
+  const currentDigits = value.replace(/\D/g, '');
+
+  if (previousDigits.length < 10) {
+    const deletingFormatting =
+      value.length < previousValue.length && currentDigits.length === previousDigits.length;
+    const digits = deletingFormatting ? currentDigits.slice(0, -1) : currentDigits;
+    const isNonNumericInsertion =
+      value.length >= previousValue.length && currentDigits.length === previousDigits.length;
+
+    if (isNonNumericInsertion) return previousValue;
+    return formatPhoneDigits(digits);
+  }
+
+  let digitCount = 0;
+  let tenthDigitEnd = value.length;
+  for (let index = 0; index < value.length; index += 1) {
+    if (/\d/.test(value[index])) {
+      digitCount += 1;
+      if (digitCount === 10) {
+        tenthDigitEnd = index + 1;
+        break;
+      }
+    }
+  }
+
+  const baseDigits = value.slice(0, tenthDigitEnd).replace(/\D/g, '').slice(0, 10);
+  if (baseDigits.length < 10) return formatPhoneDigits(value);
+
+  return `${formatPhoneDigits(baseDigits)}${value.slice(tenthDigitEnd)}`;
+};
+
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -691,7 +734,15 @@ export default function Home() {
                           <FormItem>
                             <FormLabel className="text-foreground font-semibold">Phone Number (Optional)</FormLabel>
                             <FormControl>
-                              <Input type="tel" placeholder="(847) 123-4567" {...field} className="bg-white" />
+                              <Input
+                                type="tel"
+                                placeholder="(847) 123-4567"
+                                {...field}
+                                onChange={(event) => {
+                                  field.onChange(formatPhoneInput(event.target.value, String(field.value ?? '')));
+                                }}
+                                className="bg-white"
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
