@@ -1,2 +1,3 @@
 - [Framer Motion animation typing](animation-typing.md) — type shared variants explicitly when cubic-bezier easing arrays are used.
 - [Resend sender verification](resend-sender-verification.md) — use Resend’s default sender until the branded domain is verified.
+- [Footer link hover styling](footer-link-hover-styling.md) — keep the privacy link’s explicit CSS hover rule; its Tailwind hover utility was absent at runtime.

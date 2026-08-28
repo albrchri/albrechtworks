@@ -137,3 +137,13 @@
     @apply font-heading tracking-tight;
   }
 }
+
+.footer-privacy-link {
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}
+
+.footer-privacy-link:hover {
+  text-decoration: underline;
+}

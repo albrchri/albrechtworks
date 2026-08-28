@@ -775,7 +775,7 @@ export default function Home() {
             <span className="mx-2" aria-hidden="true">•</span>
             <button
               type="button"
-              className="text-slate-400 underline underline-offset-4 transition-colors hover:text-white"
+              className="footer-privacy-link"
               onClick={() => setPrivacyPolicyOpen(true)}
             >
               Privacy Policy
