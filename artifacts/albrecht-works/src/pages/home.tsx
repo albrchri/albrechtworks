@@ -729,7 +729,7 @@ export default function Home() {
               className="text-center mt-8 text-sm text-muted-foreground flex items-center justify-center gap-2"
             >
               <Mail size={16} />
-               Prefer direct email? Reach out anytime at <span className="font-medium text-primary">chris@albrechtworks.com</span>
+               Prefer direct email? Reach out anytime at <a href="mailto:chris@albrechtworks.com" className="font-medium text-primary">chris@albrechtworks.com</a>
             </motion.div>
           </div>
         </section>
@@ -745,14 +745,14 @@ export default function Home() {
                 <span className="font-heading font-bold italic text-primary">Works</span>
               </div>
               <p className="text-sm text-slate-400">
-                Albrecht Works • Libertyville, Illinois
+                Albrecht Works LLC • Libertyville, Illinois
               </p>
             </div>
             
           </div>
           
           <div className="border-t border-slate-800 mt-8 pt-8 text-center text-sm text-slate-500">
-            © 2026 Albrecht Works. All rights reserved.
+            © 2026 Albrecht Works LLC. All rights reserved.
           </div>
         </div>
       </footer>
