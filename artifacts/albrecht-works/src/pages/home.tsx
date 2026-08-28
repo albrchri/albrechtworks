@@ -815,7 +815,7 @@ export default function Home() {
                 <span className="font-heading font-bold italic text-primary">Works</span>
               </div>
               <p className="text-sm text-slate-400">
-                Albrecht Works LLC • Libertyville, Illinois
+                Albrecht Works LLC • Libertyville, IL
               </p>
             </div>
             
