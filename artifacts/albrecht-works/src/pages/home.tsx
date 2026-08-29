@@ -335,7 +335,7 @@ export default function Home() {
                         <h3 className="font-heading text-slate-900 font-bold text-base md:text-lg">
                           Find the Bottlenecks<br />Fix the System
                         </h3>
-                        <p className="text-sm text-muted-foreground mt-1">
+                        <p className="hidden md:block text-sm text-muted-foreground mt-1">
                           I look across your workflows, software, and day-to-day processes to find where time, money, and opportunities are slipping away, and identify practical ways to improve them.
                         </p>
                       </div>
@@ -628,7 +628,7 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={staggerContainer}
-              className="grid md:grid-cols-3 gap-4 md:gap-6"
+              className="grid md:grid-cols-3 gap-3 md:gap-6 lg:gap-6"
             >
               {[
                 {
@@ -644,9 +644,9 @@ export default function Home() {
                   desc: "You work directly with me from start to finish on every stage of your project."
                 }
               ].map((card, i) => (
-                <motion.div key={i} variants={fadeInUp} className="bg-white p-4 md:p-8 rounded-xl border border-border text-center shadow-sm">
-                  <div className="w-10 h-10 mx-auto bg-blue-50 border border-blue-100 rounded-full flex items-center justify-center mb-4">
-                    <Check size={16} className="text-blue-600" />
+                <motion.div key={i} variants={fadeInUp} className="bg-white p-4 md:p-6 lg:p-8 rounded-xl border border-border text-center shadow-sm">
+                  <div className="w-8 h-8 md:w-10 md:h-10 mx-auto bg-blue-50 border border-blue-100 rounded-full flex items-center justify-center mb-3 md:mb-4">
+                    <Check size={16} className="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-600" />
                   </div>
                   <h4 className="font-bold text-foreground text-lg mb-3">{card.title}</h4>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
