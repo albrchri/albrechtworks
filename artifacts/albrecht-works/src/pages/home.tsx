@@ -190,7 +190,7 @@ export default function Home() {
       {/* Sticky Header */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
-          isScrolled ? 'bg-white/95 backdrop-blur-md border-border shadow-sm py-3' : 'bg-white border-transparent py-5'
+          isScrolled ? 'bg-white md:bg-white/95 backdrop-blur-md border-border shadow-sm py-3' : 'bg-white border-transparent py-5'
         }`}
       >
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
@@ -248,12 +248,12 @@ export default function Home() {
 
       <main className="pt-24 md:pt-32">
         {/* Hero Section */}
-        <section className="relative px-4 md:px-6 pt-12 md:pt-20 pb-20 md:pb-32 overflow-hidden bg-white">
+        <section className="relative px-4 md:px-6 pt-8 md:pt-20 pb-10 md:pb-32 overflow-hidden bg-white">
           {/* Subtle background grid pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
           
           <div className="container mx-auto max-w-6xl relative z-10">
-            <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
               
               {/* Hero Content */}
               <motion.div 
@@ -262,7 +262,7 @@ export default function Home() {
                 animate="visible"
                 variants={staggerContainer}
               >
-                <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border mb-6 md:mb-8 text-xs font-medium text-muted-foreground">
+                <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border mb-4 md:mb-8 text-xs font-medium text-muted-foreground">
                   <MapPin size={14} className="text-primary" />
                   <span>Based in Libertyville • Serving Lake County, the North Shore and greater Chicagoland.</span>
                 </motion.div>
@@ -272,11 +272,11 @@ export default function Home() {
                   Work <span className="text-blue-600">Smarter</span>
                 </motion.h1>
 
-                <motion.p variants={fadeInUp} className="text-lg md:text-xl font-semibold text-foreground mb-6">
+                <motion.p variants={fadeInUp} className="text-lg md:text-xl font-semibold text-foreground mb-4 md:mb-6">
                   Fewer Missed Calls. Less Paperwork. More Jobs Closed.
                 </motion.p>
 
-                <motion.div variants={fadeInUp} className="space-y-6 mb-6 max-w-2xl">
+                <motion.div variants={fadeInUp} className="space-y-3 md:space-y-6 mb-4 md:mb-6 max-w-2xl">
                   <p className="text-lg text-muted-foreground leading-relaxed">
                     I help local businesses save time, reduce busywork, and stop letting good customers and jobs fall through the cracks.
                   </p>
@@ -285,20 +285,20 @@ export default function Home() {
                   </p>
                 </motion.div>
 
-                <motion.div variants={fadeInUp} className="py-0 pl-[18px] pr-0 border-l-4 border-primary mb-8 w-full max-w-2xl">
+                <motion.div variants={fadeInUp} className="py-0 pl-[18px] pr-0 border-l-4 border-primary mb-6 md:mb-8 w-full max-w-2xl">
                   <p className="text-lg text-muted-foreground leading-relaxed">
                     <span className="font-bold text-foreground">The goal is simple:</span>{" "}
                     find ways to save you money, help you win more business, or both.
                   </p>
                 </motion.div>
                 
-                <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-10">
+                <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-8 md:mb-10">
                   <Button size="lg" className="w-full sm:w-auto text-base shadow-sm" onClick={() => scrollTo('diagnostic')}>
                     See How It Works
                   </Button>
                 </motion.div>
                 
-                <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-y-3 gap-x-6 text-sm font-medium text-muted-foreground">
+                <motion.div variants={fadeInUp} className="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:gap-y-3 sm:gap-x-6 text-sm font-medium text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center border border-border">
                       <Check size={12} className="text-primary" />
@@ -375,14 +375,14 @@ export default function Home() {
         </section>
 
         {/* Where Friction Hides */}
-        <section id="where-we-help" className="py-24 bg-secondary px-4 md:px-6 border-y border-border">
+        <section id="where-we-help" className="py-10 md:py-24 bg-secondary px-4 md:px-6 border-y border-border">
           <div className="container mx-auto max-w-6xl">
             <motion.div 
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
-              className="text-center max-w-3xl mx-auto mb-16"
+              className="text-center max-w-3xl mx-auto mb-10 md:mb-16"
             >
               <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
                 Where You're Losing <span className="text-blue-600">Time & Money</span>
@@ -397,7 +397,7 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={staggerContainer}
-              className="grid md:grid-cols-3 gap-8"
+              className="grid md:grid-cols-3 gap-4 md:gap-8"
             >
               {[
                 {
@@ -419,13 +419,13 @@ export default function Home() {
                   example: "Ex: Your scheduling app, job tracker, and accounting software each hold disconnected pieces of the same customer."
                 }
               ].map((card, i) => (
-                <motion.div key={i} variants={fadeInUp} className="bg-white rounded-xl p-8 border border-border shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
-                  <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center text-primary mb-6 border border-border">
+                <motion.div key={i} variants={fadeInUp} className="bg-white rounded-xl p-4 md:p-6 lg:p-8 border border-border shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-secondary flex items-center justify-center text-primary mb-4 md:mb-6 border border-border">
                     {card.icon}
                   </div>
                   <h3 className="text-xl font-heading font-bold text-foreground mb-3">{card.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed min-h-[108px] md:min-h-[130px]">{card.desc}</p>
-                  <p className="text-sm text-muted-foreground/80 italic leading-relaxed pt-6 border-t border-border">{card.example}</p>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed min-h-0 md:min-h-[130px]">{card.desc}</p>
+                  <p className="text-sm md:text-base lg:text-sm text-muted-foreground/80 italic leading-relaxed pt-4 md:pt-6 border-t border-border">{card.example}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -433,7 +433,7 @@ export default function Home() {
         </section>
 
         {/* Who It's For */}
-        <section className="py-24 bg-white px-4 md:px-6">
+        <section className="py-10 md:py-24 bg-white px-4 md:px-6">
           <div className="container mx-auto max-w-4xl text-center">
             <motion.div
               initial="hidden"
@@ -445,11 +445,11 @@ export default function Home() {
                 Built for Businesses Like <span className="text-blue-600">Yours</span>
               </motion.h2>
 
-              <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-10">
+                <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-6 md:mb-10">
                 I work well with businesses that run on phone calls, schedules, estimates, invoices and a handful of software tools.
               </motion.p>
               
-              <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-3 mb-10">
+              <motion.div variants={fadeInUp} className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:justify-center md:gap-3 mb-6 md:mb-10">
                 {[
                   "HVAC & Plumbing", 
                   "Electrical & Contracting", 
@@ -458,7 +458,7 @@ export default function Home() {
                   "Auto Repair & Specialty Shops",
                   "Professional Services"
                 ].map((pill, i) => (
-                  <div key={i} className="px-5 py-2.5 rounded-full bg-secondary border border-border text-sm font-medium text-foreground">
+                  <div key={i} className="px-3 py-2 md:px-5 md:py-2.5 rounded-full bg-secondary border border-border text-sm font-medium text-foreground">
                     {pill}
                   </div>
                 ))}
@@ -472,7 +472,7 @@ export default function Home() {
         </section>
 
         {/* The Diagnostic */}
-        <section id="diagnostic" className="py-16 bg-secondary px-4 md:px-6 border-y border-border">
+        <section id="diagnostic" className="py-10 md:py-16 bg-secondary px-4 md:px-6 border-y border-border">
           <div className="container mx-auto max-w-5xl">
             <motion.div 
               initial="hidden"
@@ -481,13 +481,13 @@ export default function Home() {
               variants={fadeInUp}
               className="bg-white rounded-2xl border-2 border-primary/20 shadow-xl overflow-hidden"
             >
-              <div className="p-8 md:p-10">
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-6">
+              <div className="p-4 md:p-8 lg:p-10">
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 md:gap-6 mb-4 md:mb-6">
                   <div>
                     <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider rounded-md mb-3 border border-primary/20">
                       Fixed-Scope Entry Offer
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-3">
+                    <h2 className="text-2xl md:text-4xl font-heading font-extrabold text-foreground mb-3">
                       The 90-Minute Operations <span className="text-blue-600">Diagnostic</span>
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl">
@@ -502,7 +502,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-6">
                   {[
                     {
                       step: "01",
@@ -520,7 +520,7 @@ export default function Home() {
                       desc: "Within 3 business days, you'll get a prioritized list of your top fixes, bottom-line impact, and next steps."
                     }
                   ].map((s, i) => (
-                    <div key={i} className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-5">
+                    <div key={i} className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-4 md:p-5">
                       <div className="text-blue-600 font-extrabold text-sm tracking-wider uppercase mb-2">{s.step}</div>
                       <h4 className="text-slate-900 font-bold text-base mb-2">{s.title}</h4>
                       <p className="text-slate-600 text-sm leading-relaxed">{s.desc}</p>
@@ -528,7 +528,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="bg-blue-50 py-5 px-5 rounded-r-lg rounded-l-none border-l-4 border-primary border-t-0 border-r-0 border-b-0 my-4 w-full self-stretch mx-0">
+                <div className="bg-blue-50 py-4 px-4 md:py-5 md:px-5 rounded-r-lg rounded-l-none border-l-4 border-primary border-t-0 border-r-0 border-b-0 my-4 w-full self-stretch mx-0">
                   <p className="text-base text-muted-foreground leading-relaxed">
                     <span className="font-bold text-foreground">Why it pays for itself:</span>{" "}
                     A single fix can cut wasteful expenses, book more jobs, or save hours on routine tasks. Finding just one typically covers the one-time diagnostic and keeps paying off month after month.
@@ -546,9 +546,9 @@ export default function Home() {
         </section>
 
         {/* About Chris Albrecht */}
-        <section id="about" className="py-24 bg-white px-4 md:px-6">
+        <section id="about" className="py-10 md:py-24 bg-white px-4 md:px-6">
           <div className="container mx-auto max-w-5xl">
-            <div className="grid md:grid-cols-12 gap-12 items-center">
+            <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
               
               <motion.div 
                 className="md:col-span-5"
@@ -557,12 +557,12 @@ export default function Home() {
                 viewport={{ once: true, margin: "-50px" }}
                 variants={fadeInUp}
               >
-                <div className="bg-secondary rounded-2xl p-6 border border-border shadow-sm">
-                  <div className="aspect-square rounded-xl bg-white border border-border mb-6 flex items-center justify-center overflow-hidden relative">
+                <div className="bg-secondary rounded-2xl p-4 md:p-6 border border-border shadow-sm">
+                  <div className="h-56 md:aspect-square md:h-auto rounded-xl bg-white border border-border mb-4 md:mb-6 flex items-center justify-center overflow-hidden relative">
                      <img
                        src="/headshot.jpg"
                        alt="Chris Albrecht"
-                       className="w-full h-full object-cover rounded-lg"
+                       className="max-h-full max-w-full w-auto object-contain rounded-lg md:h-full md:w-full md:max-h-none md:max-w-none md:object-cover"
                      />
                   </div>
                   <div className="text-center space-y-2 pb-2">
@@ -609,14 +609,14 @@ export default function Home() {
         </section>
 
         {/* The Anti-Agency Trust Anchor */}
-        <section className="py-24 bg-secondary px-4 md:px-6 border-y border-border">
+        <section className="py-10 md:py-24 bg-secondary px-4 md:px-6 border-y border-border">
           <div className="container mx-auto max-w-5xl">
             <motion.div 
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
-              className="text-center mb-16"
+              className="text-center mb-8 md:mb-16"
             >
               <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-heading font-bold text-slate-900">
                 Direct. Honest. <span className="text-blue-600 font-bold">Practical.</span>
@@ -628,7 +628,7 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={staggerContainer}
-              className="grid md:grid-cols-3 gap-6"
+              className="grid md:grid-cols-3 gap-4 md:gap-6"
             >
               {[
                 {
@@ -644,7 +644,7 @@ export default function Home() {
                   desc: "You work directly with me from start to finish on every stage of your project."
                 }
               ].map((card, i) => (
-                <motion.div key={i} variants={fadeInUp} className="bg-white p-8 rounded-xl border border-border text-center shadow-sm">
+                <motion.div key={i} variants={fadeInUp} className="bg-white p-4 md:p-8 rounded-xl border border-border text-center shadow-sm">
                   <div className="w-10 h-10 mx-auto bg-blue-50 border border-blue-100 rounded-full flex items-center justify-center mb-4">
                     <Check size={16} className="text-blue-600" />
                   </div>
@@ -657,14 +657,14 @@ export default function Home() {
         </section>
 
         {/* Contact & Intake Form */}
-        <section id="contact" className="py-24 bg-white px-4 md:px-6">
+        <section id="contact" className="py-10 md:py-24 bg-white px-4 md:px-6">
           <div className="container mx-auto max-w-3xl">
             <motion.div 
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={fadeInUp}
-              className="text-center mb-12"
+              className="text-center mb-8 md:mb-12"
             >
               <h2 className="text-3xl md:text-4xl font-heading font-bold text-slate-900 mb-4">
                 Let's Make Your Business Run <span className="text-blue-600 font-bold">Better</span>
@@ -679,7 +679,7 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={fadeInUp}
-              className="bg-secondary rounded-2xl p-6 md:p-10 border border-border shadow-sm relative overflow-hidden"
+              className="bg-secondary rounded-2xl p-4 md:p-10 border border-border shadow-sm relative overflow-hidden"
             >
               {submitSuccess ? (
                 <div className="text-center py-12">

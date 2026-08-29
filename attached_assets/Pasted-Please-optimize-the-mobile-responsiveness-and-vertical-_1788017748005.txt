@@ -1,0 +1,11 @@
+Please optimize the mobile responsiveness and vertical spacing for viewports under 640px, without modifying, breaking, or regressing the desktop layout in any way. Leave all existing md: and lg: breakpoint classes intact, only adjust base mobile classes and apply md: prefixes where desktop styles need to stay unchanged.
+
+Global spacing: reduce mobile vertical padding on major sections (py-8 or py-10 on mobile, preserve md:py-20 on desktop).
+Hero section: reduce mobile top padding and spacing so "See How It Works" appears higher on mobile. Tighten body copy spacing (space-y-3 instead of larger gaps). Reduce "The 90-Minute Operations Diagnostic" heading size specifically on mobile so it wraps to no more than two lines rather than three.
+"Where You're Losing Time & Money" cards: reduce inner card padding to p-4 on mobile (keep md:p-6). Reduce body and example text to text-sm on mobile (text-sm md:text-base).
+Industry badges ("Built for Businesses Like Yours"): do not stack as a single vertical column on mobile. Use a 2-column grid on mobile (grid grid-cols-2 gap-2 md:flex md:flex-wrap md:justify-center) so all six fit in a compact block.
+Diagnostic card: reduce padding to p-4 or p-5 on mobile (keep md:p-8). Tighten spacing between the three numbered steps.
+Trust checkmarks under the hero button (20+ Years, No Vendor Agenda, Clear Fixed-Scope): compact these on mobile, either tighter line spacing or two per row, rather than three full-width stacked lines.
+About/founder section: keep the headshot's current rectangular shape and aspect ratio, just constrain its height on mobile (max-h-56 or similar) so the photo, name, and credentials stay closely grouped without excessive scroll. Do not crop it into a circle.
+Sticky navigation header: confirm the header has a fully opaque background and correct z-index stacking at mobile widths, so no page content can appear behind or through it while scrolling.
+Verification: after these changes, test at a 390px viewport width and confirm mobile spacing looks correct, then test at 1280px and above and confirm desktop is completely visually unchanged from before this update. Report back which specific classes or breakpoints were touched.
