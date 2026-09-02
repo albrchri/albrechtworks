@@ -32,6 +32,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
+const headerWordmarkSrc = `${import.meta.env.BASE_URL}brand/header-wordmark.svg`;
+const footerWordmarkSrc = `${import.meta.env.BASE_URL}brand/footer-wordmark.svg`;
+
 const formSchema = z.object({
   name: z.string().min(2, 'Full Name is required'),
   businessName: z.string().min(2, 'Business Name is required'),
@@ -195,10 +198,11 @@ export default function Home() {
       >
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
           <div className="flex cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="text-xl md:text-2xl tracking-tight flex items-center gap-1.5">
-              <span className="font-heading font-bold text-foreground">Albrecht</span>
-              <span className="font-heading font-bold italic text-primary">Works</span>
-            </div>
+              <img
+                src={headerWordmarkSrc}
+                alt="Albrecht Works"
+                className="h-8 md:h-10 w-auto"
+              />
           </div>
 
           {/* Desktop Nav */}
@@ -820,10 +824,11 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex flex-col items-center md:items-start">
-              <div className="text-xl tracking-tight flex items-center gap-1.5 mb-2">
-                <span className="font-heading font-bold text-white">Albrecht</span>
-                <span className="font-heading font-bold italic text-primary">Works</span>
-              </div>
+              <img
+                src={footerWordmarkSrc}
+                alt="Albrecht Works"
+                className="h-10 md:h-12 w-auto mb-2"
+              />
               <p className="text-sm text-slate-400">
                 Albrecht Works LLC • Libertyville, IL
               </p>

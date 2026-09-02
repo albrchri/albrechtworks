@@ -1,0 +1,39 @@
+Please integrate the final Albrecht Works logo assets into the existing website.
+
+The logo files are already in the project's `attached_assets` folder. Please use these exact files:
+
+- Website header: `Albrecht Works - Wordmark (white background).svg`
+- Website footer: `Albrecht Works - Wordmark (navy background).svg`
+- Favicon: `Albrecht Works - Monogram (white background).svg`
+
+Please replace the existing text-based logo treatment with these actual logo assets.
+
+### Header
+Use `Albrecht Works - Wordmark (white background).svg` in the website header.
+
+Size and position it appropriately for both desktop and mobile. Preserve the current header's overall design and layout. The logo should remain crisp, proportional, and visually balanced next to the navigation on desktop and the hamburger/navigation controls on mobile.
+
+### Footer
+Use `Albrecht Works - Wordmark (navy background).svg` in the website footer.
+
+Size it appropriately for both desktop and mobile while preserving the existing footer design and proportions.
+
+### Favicon
+Use `Albrecht Works - Monogram (white background).svg` as the site's favicon / browser icon.
+
+Configure it appropriately for modern browsers and devices, using the supplied monogram artwork rather than the full wordmark.
+
+### Important implementation requirements
+- Use the supplied SVG artwork exactly as provided.
+- Do not recreate, redraw, alter, recolor, or modify the logo artwork.
+- Preserve the exact proportions and A-to-W connection.
+- Do not stretch, squash, or distort the logo.
+- Use responsive sizing so the logo looks intentional at both desktop and mobile widths.
+- Use the SVG assets rather than rasterizing them wherever possible.
+- Maintain appropriate clear space around the logos.
+- Do not change the site's existing color palette, typography, sections, or overall design.
+- Do not make unrelated visual or layout changes.
+
+The existing desktop experience is already finalized and should remain essentially unchanged. This task is specifically to replace the current logo treatment with the final logo assets and size them appropriately across desktop and mobile.
+
+After implementation, verify the header, footer, and favicon on both desktop and mobile and make only the responsive sizing/positioning adjustments necessary for a polished result.
