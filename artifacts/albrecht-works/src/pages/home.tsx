@@ -201,7 +201,7 @@ export default function Home() {
               <img
                 src={headerWordmarkSrc}
                 alt="Albrecht Works"
-                className="h-8 md:h-10 w-auto"
+                className="h-8 md:h-10 w-auto origin-left md:scale-110"
               />
           </div>
 
