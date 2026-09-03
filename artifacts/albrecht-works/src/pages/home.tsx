@@ -823,11 +823,11 @@ export default function Home() {
       <footer className="bg-foreground text-secondary py-12 px-4 md:px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex flex-col items-center md:items-start">
+            <div className="flex flex-row items-center gap-3">
               <img
                 src={footerWordmarkSrc}
                 alt="Albrecht Works"
-                className="h-10 md:h-12 w-auto mb-2"
+                className="h-10 md:h-12 w-auto"
               />
               <p className="text-sm text-slate-400">
                 Libertyville, IL
