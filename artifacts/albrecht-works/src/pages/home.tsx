@@ -830,7 +830,7 @@ export default function Home() {
                 className="h-10 md:h-12 w-auto mb-2"
               />
               <p className="text-sm text-slate-400">
-                Albrecht Works LLC • Libertyville, IL
+                Libertyville, IL
               </p>
             </div>
             
