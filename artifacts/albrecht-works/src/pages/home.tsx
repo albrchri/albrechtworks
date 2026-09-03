@@ -828,7 +828,7 @@ export default function Home() {
               alt="Albrecht Works"
               className="h-10 md:h-12 w-auto"
             />
-            <span>© 2026 Albrecht Works LLC. All rights reserved.</span>
+            <span>© 2026 Albrecht Works LLC. Libertyville, IL. All rights reserved.</span>
             <span className="mx-2" aria-hidden="true">•</span>
             <button
               type="button"
