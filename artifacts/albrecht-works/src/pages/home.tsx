@@ -820,9 +820,9 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-foreground text-secondary py-12 px-4 md:px-6">
+      <footer className="bg-foreground text-secondary py-8 px-4 md:py-10 md:px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="border-t border-slate-800 pt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center text-sm text-slate-500">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center text-sm text-slate-500">
             <img
               src={footerWordmarkSrc}
               alt="Albrecht Works"
