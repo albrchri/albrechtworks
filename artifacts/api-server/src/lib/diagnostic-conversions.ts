@@ -7,6 +7,9 @@ const WEBHOOK_PATH = "/api/stripe/webhook";
 const DIAGNOSTIC_AMOUNT = 49_500;
 const DIAGNOSTIC_CURRENCY = "usd";
 const DIAGNOSTIC_OFFER = "operations_diagnostic";
+const RECONCILIATION_INTERVAL_MS = 15 * 60 * 1000;
+const RECONCILIATION_LOOKBACK_SECONDS = 7 * 24 * 60 * 60;
+const STRIPE_PAGE_SIZE = 100;
 const WEBHOOK_EVENTS = [
   "checkout.session.completed",
   "checkout.session.async_payment_succeeded",
@@ -20,6 +23,42 @@ type StoredWebhook = {
 type StripeWebhookEndpoint = {
   id: string;
   secret?: string;
+};
+
+type StripeCheckoutSession = {
+  id: string;
+  amount_total?: number | null;
+  created: number;
+  currency?: string | null;
+  metadata?: Record<string, string>;
+  payment_status?: string;
+  status?: string | null;
+};
+
+type StripeList<T> = {
+  data: T[];
+  has_more: boolean;
+};
+
+type StripeConnector = Pick<ReplitConnectors, "proxy">;
+
+type ReconciliationLogger = Pick<typeof logger, "error" | "info">;
+
+type DiagnosticReconciliationDependencies = {
+  createConnector: () => StripeConnector;
+  recordConversion: (
+    checkoutSessionId: string,
+    completedAt?: Date,
+  ) => Promise<boolean>;
+  log: ReconciliationLogger;
+  now: () => Date;
+};
+
+const defaultReconciliationDependencies: DiagnosticReconciliationDependencies = {
+  createConnector: () => new ReplitConnectors(),
+  recordConversion: recordDiagnosticConversion,
+  log: logger,
+  now: () => new Date(),
 };
 
 async function parseStripeResponse<T>(response: Response): Promise<T> {
@@ -170,6 +209,88 @@ export async function processDiagnosticWebhook(
     session.id,
     new Date(event.created * 1000),
   );
+}
+
+function isPaidDiagnosticSession(session: StripeCheckoutSession): boolean {
+  return (
+    session.payment_status === "paid" &&
+    session.status === "complete" &&
+    session.amount_total === DIAGNOSTIC_AMOUNT &&
+    session.currency === DIAGNOSTIC_CURRENCY &&
+    session.metadata?.offer === DIAGNOSTIC_OFFER
+  );
+}
+
+export async function reconcileDiagnosticConversions(
+  dependencies: DiagnosticReconciliationDependencies = defaultReconciliationDependencies,
+): Promise<{ examined: number; recorded: number }> {
+  const connectors = dependencies.createConnector();
+  const createdAfter = Math.floor(
+    dependencies.now().getTime() / 1000 - RECONCILIATION_LOOKBACK_SECONDS,
+  );
+  let startingAfter: string | undefined;
+  let examined = 0;
+  let recorded = 0;
+
+  try {
+    do {
+      const query = new URLSearchParams({
+        status: "complete",
+        limit: String(STRIPE_PAGE_SIZE),
+        "created[gte]": String(createdAfter),
+      });
+      if (startingAfter) query.set("starting_after", startingAfter);
+
+      const response = await connectors.proxy(
+        "stripe",
+        `/v1/checkout/sessions?${query.toString()}`,
+        { method: "GET" },
+      );
+      const page =
+        await parseStripeResponse<StripeList<StripeCheckoutSession>>(response);
+
+      for (const session of page.data) {
+        examined += 1;
+        if (
+          isPaidDiagnosticSession(session) &&
+          (await dependencies.recordConversion(
+            session.id,
+            new Date(session.created * 1000),
+          ))
+        ) {
+          recorded += 1;
+        }
+      }
+
+      startingAfter = page.has_more ? page.data.at(-1)?.id : undefined;
+      if (page.has_more && !startingAfter) {
+        throw new Error("Stripe returned an empty paginated Checkout Session list");
+      }
+    } while (startingAfter);
+  } catch (error) {
+    dependencies.log.error(
+      { err: error },
+      "Diagnostic conversion reconciliation could not reach Stripe",
+    );
+    throw error;
+  }
+
+  dependencies.log.info(
+    { examined, recorded },
+    "Reconciled diagnostic purchase conversions",
+  );
+  return { examined, recorded };
+}
+
+export function startDiagnosticConversionReconciliation(): NodeJS.Timeout {
+  const run = (): void => {
+    void reconcileDiagnosticConversions().catch(() => undefined);
+  };
+
+  run();
+  const timer = setInterval(run, RECONCILIATION_INTERVAL_MS);
+  timer.unref();
+  return timer;
 }
 
 export async function recordDiagnosticConversion(

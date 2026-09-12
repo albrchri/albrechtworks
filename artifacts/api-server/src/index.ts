@@ -1,6 +1,9 @@
 import app from "./app";
 import { logger } from "./lib/logger";
-import { initializeDiagnosticConversions } from "./lib/diagnostic-conversions";
+import {
+  initializeDiagnosticConversions,
+  startDiagnosticConversionReconciliation,
+} from "./lib/diagnostic-conversions";
 
 const rawPort = process.env["PORT"];
 
@@ -17,6 +20,7 @@ if (Number.isNaN(port) || port <= 0) {
 }
 
 await initializeDiagnosticConversions();
+startDiagnosticConversionReconciliation();
 
 app.listen(port, (err) => {
   if (err) {
