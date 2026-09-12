@@ -31,6 +31,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { trackEvent } from '@/lib/analytics';
 
 const headerWordmarkSrc = `${import.meta.env.BASE_URL}brand/header-wordmark.svg`;
 const footerWordmarkSrc = `${import.meta.env.BASE_URL}brand/footer-wordmark.svg`;
@@ -162,16 +163,26 @@ export default function Home() {
         throw new Error('Contact form delivery failed');
       }
 
+      trackEvent('contact_form_submitted', {
+        offer: 'operations_diagnostic',
+      });
       setSubmitSuccess(true);
       form.reset();
     } catch {
+      trackEvent('contact_form_failed', {
+        offer: 'operations_diagnostic',
+      });
       setSubmitError('Something went wrong while sending your request. Please try again or email chris@albrechtworks.com directly.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (id: string, source: string) => {
+    trackEvent('navigation_clicked', {
+      destination: id,
+      source,
+    });
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
@@ -197,7 +208,13 @@ export default function Home() {
         }`}
       >
         <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-          <div className="flex cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <div
+            className="flex cursor-pointer"
+            onClick={() => {
+              trackEvent('logo_clicked', { location: 'header' });
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
               <img
                 src={headerWordmarkSrc}
                 alt="Albrecht Works"
@@ -207,16 +224,16 @@ export default function Home() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <button onClick={() => scrollTo('where-we-help')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <button onClick={() => scrollTo('where-we-help', 'desktop_header')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               How I Help
             </button>
-            <button onClick={() => scrollTo('diagnostic')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <button onClick={() => scrollTo('diagnostic', 'desktop_header')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               The Diagnostic
             </button>
-            <button onClick={() => scrollTo('about')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <button onClick={() => scrollTo('about', 'desktop_header')} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               About
             </button>
-            <Button onClick={() => scrollTo('contact')} className="ml-2 font-medium shadow-sm">
+            <Button onClick={() => scrollTo('contact', 'desktop_header')} className="ml-2 font-medium shadow-sm">
               Contact
             </Button>
           </nav>
@@ -224,7 +241,13 @@ export default function Home() {
           {/* Mobile Menu Toggle */}
           <button 
             className="md:hidden p-2 -mr-2 text-foreground"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => {
+              const nextOpen = !mobileMenuOpen;
+              setMobileMenuOpen(nextOpen);
+              trackEvent('mobile_menu_toggled', {
+                state: nextOpen ? 'opened' : 'closed',
+              });
+            }}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -234,16 +257,16 @@ export default function Home() {
         {/* Mobile Nav */}
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-lg p-4 flex flex-col gap-4">
-            <button onClick={() => scrollTo('where-we-help')} className="text-left px-4 py-3 text-sm font-medium border-b border-border/50">
+            <button onClick={() => scrollTo('where-we-help', 'mobile_menu')} className="text-left px-4 py-3 text-sm font-medium border-b border-border/50">
               How I Help
             </button>
-            <button onClick={() => scrollTo('diagnostic')} className="text-left px-4 py-3 text-sm font-medium border-b border-border/50">
+            <button onClick={() => scrollTo('diagnostic', 'mobile_menu')} className="text-left px-4 py-3 text-sm font-medium border-b border-border/50">
               The Diagnostic
             </button>
-            <button onClick={() => scrollTo('about')} className="text-left px-4 py-3 text-sm font-medium border-b border-border/50">
+            <button onClick={() => scrollTo('about', 'mobile_menu')} className="text-left px-4 py-3 text-sm font-medium border-b border-border/50">
               About
             </button>
-            <Button onClick={() => scrollTo('contact')} className="w-full mt-2">
+            <Button onClick={() => scrollTo('contact', 'mobile_menu')} className="w-full mt-2">
               Contact
             </Button>
           </div>
@@ -297,7 +320,7 @@ export default function Home() {
                 </motion.div>
                 
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-8 md:mb-10">
-                  <Button size="lg" className="w-full sm:w-auto text-base shadow-sm" onClick={() => scrollTo('diagnostic')}>
+                  <Button size="lg" className="w-full sm:w-auto text-base shadow-sm" onClick={() => scrollTo('diagnostic', 'hero')}>
                     See How It Works
                   </Button>
                 </motion.div>
@@ -540,7 +563,7 @@ export default function Home() {
                 </div>
 
                 <div className="text-center">
-                  <Button size="lg" className="w-full md:w-auto text-lg px-8 shadow-md" onClick={() => scrollTo('contact')}>
+                  <Button size="lg" className="w-full md:w-auto text-lg px-8 shadow-md" onClick={() => scrollTo('contact', 'diagnostic_section')}>
                     Request the Diagnostic
                   </Button>
                 </div>
@@ -813,7 +836,7 @@ export default function Home() {
               className="text-center mt-8 text-sm text-muted-foreground flex items-center justify-center gap-2"
             >
               <Mail size={16} />
-               Prefer direct email? Reach out anytime at <a href="mailto:chris@albrechtworks.com?subject=Albrecht%20Works%20website%20inquiry" className="font-medium text-primary">chris@albrechtworks.com</a>
+               Prefer direct email? Reach out anytime at <a href="mailto:chris@albrechtworks.com?subject=Albrecht%20Works%20website%20inquiry" className="font-medium text-primary" onClick={() => trackEvent('direct_email_clicked', { location: 'contact_section' })}>chris@albrechtworks.com</a>
             </motion.div>
           </div>
         </section>
@@ -833,7 +856,10 @@ export default function Home() {
             <button
               type="button"
               className="footer-privacy-link"
-              onClick={() => setPrivacyPolicyOpen(true)}
+              onClick={() => {
+                trackEvent('privacy_policy_opened', { location: 'footer' });
+                setPrivacyPolicyOpen(true);
+              }}
             >
               Privacy Policy
             </button>
@@ -918,7 +944,7 @@ export default function Home() {
                 <section>
                   <h3 className="mb-2 text-lg font-bold text-foreground">Contact</h3>
                   <p>
-                    Questions about this policy can be sent to <a href="mailto:chris@albrechtworks.com?subject=Albrecht%20Works%20privacy%20policy%20question" className="font-medium text-primary underline underline-offset-4">chris@albrechtworks.com</a>.
+                    Questions about this policy can be sent to <a href="mailto:chris@albrechtworks.com?subject=Albrecht%20Works%20privacy%20policy%20question" className="font-medium text-primary underline underline-offset-4" onClick={() => trackEvent('direct_email_clicked', { location: 'privacy_policy' })}>chris@albrechtworks.com</a>.
                   </p>
                 </section>
               </div>
