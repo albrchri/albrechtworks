@@ -36,7 +36,8 @@ async function startRoute(responses: unknown[]) {
         proxy: async (connector, path, init) => {
           assert(init);
           calls.push({ connector, path, init });
-          return Response.json(responses.shift());
+          const response = responses.shift();
+          return response instanceof Response ? response : Response.json(response);
         },
       }),
       recordConversion: async (sessionId) => {
@@ -160,4 +161,55 @@ test("creates checkout from the expected price, metadata, URLs, and redirect", a
       "https://albrecht.example/?checkout=success&session_id={CHECKOUT_SESSION_ID}",
     cancel_url: "https://albrecht.example/?checkout=cancelled#diagnostic",
   });
+});
+
+const checkoutUnavailableResponse = {
+  error: "Checkout is temporarily unavailable.",
+};
+
+test("returns a safe temporary error when the diagnostic price is missing", async () => {
+  const fixture = await startRoute([{ data: [] }]);
+  const response = await fetch(`${fixture.baseUrl}/diagnostic-checkout`, {
+    redirect: "manual",
+  });
+
+  assert.equal(response.status, 502);
+  assert.equal(response.headers.get("location"), null);
+  assert.deepEqual(await response.json(), checkoutUnavailableResponse);
+  assert.equal(fixture.calls.length, 1);
+});
+
+test("returns a safe temporary error when Stripe omits the checkout URL", async () => {
+  process.env.REPLIT_DOMAINS = "albrecht.example";
+  const fixture = await startRoute([
+    { data: [{ id: "price_diagnostic" }] },
+    { id: "cs_test_without_url" },
+  ]);
+  const response = await fetch(`${fixture.baseUrl}/diagnostic-checkout`, {
+    redirect: "manual",
+  });
+
+  assert.equal(response.status, 502);
+  assert.equal(response.headers.get("location"), null);
+  assert.deepEqual(await response.json(), checkoutUnavailableResponse);
+  assert.equal(fixture.calls.length, 2);
+});
+
+test("does not expose Stripe error details when checkout creation fails", async () => {
+  process.env.REPLIT_DOMAINS = "albrecht.example";
+  const providerDetails = "No such price: price_diagnostic";
+  const fixture = await startRoute([
+    { data: [{ id: "price_diagnostic" }] },
+    new Response(providerDetails, { status: 400 }),
+  ]);
+  const response = await fetch(`${fixture.baseUrl}/diagnostic-checkout`, {
+    redirect: "manual",
+  });
+  const responseBody = await response.text();
+
+  assert.equal(response.status, 502);
+  assert.equal(response.headers.get("location"), null);
+  assert.deepEqual(JSON.parse(responseBody), checkoutUnavailableResponse);
+  assert.equal(responseBody.includes(providerDetails), false);
+  assert.equal(fixture.calls.length, 2);
 });
