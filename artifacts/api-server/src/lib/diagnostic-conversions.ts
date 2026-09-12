@@ -64,6 +64,18 @@ type StripeList<T> = {
 
 type StripeConnector = Pick<ReplitConnectors, "proxy">;
 
+export class StripeConnectorAccessError extends Error {
+  override name = "StripeConnectorAccessError";
+}
+
+export class StripeCheckoutSessionsContractError extends Error {
+  override name = "StripeCheckoutSessionsContractError";
+}
+
+export class StripeContractCheckInconclusiveError extends Error {
+  override name = "StripeContractCheckInconclusiveError";
+}
+
 type ReconciliationLogger = Pick<typeof logger, "error" | "fatal" | "info">;
 
 type ReconciliationFailureState = {
@@ -132,6 +144,124 @@ async function parseStripeResponse<T>(response: Response): Promise<T> {
   }
 
   return (await response.json()) as T;
+}
+
+function assertCheckoutSessionContract(
+  value: unknown,
+): asserts value is StripeList<DiagnosticStripeSession> {
+  if (typeof value !== "object" || value === null) {
+    throw new StripeCheckoutSessionsContractError(
+      "Stripe Checkout Session list response must be an object",
+    );
+  }
+
+  const page = value as Record<string, unknown>;
+  if (!Array.isArray(page.data)) {
+    throw new StripeCheckoutSessionsContractError(
+      "Stripe Checkout Session list response is missing the data array",
+    );
+  }
+  if (typeof page.has_more !== "boolean") {
+    throw new StripeCheckoutSessionsContractError(
+      "Stripe Checkout Session list response is missing the has_more boolean",
+    );
+  }
+
+  for (const [index, sessionValue] of page.data.entries()) {
+    if (typeof sessionValue !== "object" || sessionValue === null) {
+      throw new StripeCheckoutSessionsContractError(
+        `Stripe Checkout Session at data[${index}] must be an object`,
+      );
+    }
+
+    const session = sessionValue as Record<string, unknown>;
+    const valid =
+      typeof session.id === "string" &&
+      typeof session.created === "number" &&
+      typeof session.payment_status === "string" &&
+      (typeof session.status === "string" || session.status === null) &&
+      (typeof session.amount_total === "number" ||
+        session.amount_total === null) &&
+      (typeof session.currency === "string" || session.currency === null) &&
+      typeof session.metadata === "object" &&
+      session.metadata !== null &&
+      !Array.isArray(session.metadata);
+
+    if (!valid) {
+      throw new StripeCheckoutSessionsContractError(
+        `Stripe Checkout Session at data[${index}] is missing a required recovery field`,
+      );
+    }
+  }
+}
+
+export async function checkStripeCheckoutSessionsContract(
+  createConnector: () => StripeConnector = () => new ReplitConnectors(),
+): Promise<{ sessionsValidated: number; pagesValidated: number }> {
+  const fetchPage = async (startingAfter?: string): Promise<unknown> => {
+    let response: Response;
+    const query = new URLSearchParams({
+      status: "complete",
+      limit: "1",
+    });
+    if (startingAfter) query.set("starting_after", startingAfter);
+
+    try {
+      response = await createConnector().proxy(
+        "stripe",
+        `/v1/checkout/sessions?${query.toString()}`,
+        { method: "GET" },
+      );
+    } catch (error) {
+      throw new StripeConnectorAccessError(
+        `Stripe connector access failed: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error },
+      );
+    }
+
+    if (!response.ok) {
+      const providerResponse = await response.text();
+      throw new StripeConnectorAccessError(
+        `Stripe connector access failed (${response.status}): ${providerResponse.slice(0, 300)}`,
+      );
+    }
+
+    try {
+      return await response.json();
+    } catch (error) {
+      throw new StripeCheckoutSessionsContractError(
+        "Stripe Checkout Session list response is not valid JSON",
+        { cause: error },
+      );
+    }
+  };
+
+  const firstPage = await fetchPage();
+  assertCheckoutSessionContract(firstPage);
+  const cursor = firstPage.data.at(-1)?.id;
+  if (!cursor || !firstPage.has_more) {
+    throw new StripeContractCheckInconclusiveError(
+      "Stripe contract check needs at least two completed Checkout Sessions to exercise cursor pagination",
+    );
+  }
+
+  const secondPage = await fetchPage(cursor);
+  assertCheckoutSessionContract(secondPage);
+  if (secondPage.data.length === 0) {
+    throw new StripeCheckoutSessionsContractError(
+      "Stripe returned has_more=true followed by an empty Checkout Session page",
+    );
+  }
+  if (secondPage.data.some((session) => session.id === cursor)) {
+    throw new StripeCheckoutSessionsContractError(
+      "Stripe Checkout Session pagination did not advance beyond starting_after",
+    );
+  }
+
+  return {
+    sessionsValidated: firstPage.data.length + secondPage.data.length,
+    pagesValidated: 2,
+  };
 }
 
 function getWebhookUrl(): string {

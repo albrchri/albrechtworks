@@ -1,9 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  checkStripeCheckoutSessionsContract,
   getDiagnosticConversionReport,
   processDiagnosticWebhook,
   reconcileDiagnosticConversions,
+  StripeCheckoutSessionsContractError,
+  StripeConnectorAccessError,
+  StripeContractCheckInconclusiveError,
 } from "./diagnostic-conversions";
 import { pool } from "@workspace/db";
 
@@ -15,6 +19,92 @@ const paidDiagnosticSession = {
   currency: "usd",
   metadata: { offer: "operations_diagnostic" },
 };
+
+test("validates the live Stripe Checkout Session list contract", async () => {
+  const calls: string[] = [];
+  const result = await checkStripeCheckoutSessionsContract(() => ({
+    proxy: async (_connector, path, init) => {
+      calls.push(path);
+      assert.match(path, /^\/v1\/checkout\/sessions\?/);
+      assert.match(path, /status=complete/);
+      assert.match(path, /limit=1/);
+      assert.equal(init?.method, "GET");
+      return Response.json({
+        data: [
+          {
+            ...paidDiagnosticSession,
+            id:
+              calls.length === 1
+                ? "cs_paid_diagnostic_first"
+                : "cs_paid_diagnostic_second",
+            created: 2_000_000_000,
+          },
+        ],
+        has_more: calls.length === 1,
+      });
+    },
+  }));
+
+  assert.deepEqual(result, { sessionsValidated: 2, pagesValidated: 2 });
+  assert.equal(calls.length, 2);
+  assert.match(
+    calls[1] ?? "",
+    /starting_after=cs_paid_diagnostic_first/,
+  );
+});
+
+test("distinguishes Stripe connector access failures from contract changes", async () => {
+  await assert.rejects(
+    checkStripeCheckoutSessionsContract(() => ({
+      proxy: async () =>
+        new Response("connection unavailable", { status: 503 }),
+    })),
+    (error: unknown) =>
+      error instanceof StripeConnectorAccessError &&
+      /connector access failed \(503\)/.test(error.message),
+  );
+
+  await assert.rejects(
+    checkStripeCheckoutSessionsContract(() => ({
+      proxy: async () => Response.json({ data: [], has_more: "false" }),
+    })),
+    (error: unknown) =>
+      error instanceof StripeCheckoutSessionsContractError &&
+      /has_more boolean/.test(error.message),
+  );
+});
+
+test("rejects cursor pagination that does not advance", async () => {
+  await assert.rejects(
+    checkStripeCheckoutSessionsContract(() => ({
+      proxy: async () =>
+        Response.json({
+          data: [
+            {
+              ...paidDiagnosticSession,
+              id: "cs_repeated",
+              created: 2_000_000_000,
+            },
+          ],
+          has_more: true,
+        }),
+    })),
+    (error: unknown) =>
+      error instanceof StripeCheckoutSessionsContractError &&
+      /did not advance/.test(error.message),
+  );
+});
+
+test("reports insufficient completed sessions as inconclusive", async () => {
+  await assert.rejects(
+    checkStripeCheckoutSessionsContract(() => ({
+      proxy: async () => Response.json({ data: [], has_more: false }),
+    })),
+    (error: unknown) =>
+      error instanceof StripeContractCheckInconclusiveError &&
+      /at least two completed Checkout Sessions/.test(error.message),
+  );
+});
 
 test("webhook records only sessions accepted by the shared diagnostic predicate", async () => {
   process.env.REPLIT_DOMAINS = "albrecht.example";
