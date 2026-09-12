@@ -2,9 +2,74 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   getDiagnosticConversionReport,
+  processDiagnosticWebhook,
   reconcileDiagnosticConversions,
 } from "./diagnostic-conversions";
 import { pool } from "@workspace/db";
+
+const paidDiagnosticSession = {
+  id: "cs_paid_diagnostic",
+  payment_status: "paid",
+  status: "complete",
+  amount_total: 49_500,
+  currency: "usd",
+  metadata: { offer: "operations_diagnostic" },
+};
+
+test("webhook records only sessions accepted by the shared diagnostic predicate", async () => {
+  process.env.REPLIT_DOMAINS = "albrecht.example";
+  const recorded: Array<{ id: string; completedAt?: Date }> = [];
+
+  const accepted = await processDiagnosticWebhook(
+    Buffer.from("{}"),
+    "signature",
+    {
+      getStoredWebhook: async () => ({
+        endpoint_id: "we_123",
+        signing_secret: "secret",
+      }),
+      constructEvent: async () => ({
+        type: "checkout.session.completed",
+        created: 2_000_000_000,
+        data: { object: paidDiagnosticSession },
+      }),
+      recordConversion: async (id, completedAt) => {
+        recorded.push({ id, completedAt });
+        return true;
+      },
+    },
+  );
+
+  assert.equal(accepted, true);
+  assert.deepEqual(
+    recorded.map(({ id, completedAt }) => [id, completedAt?.toISOString()]),
+    [["cs_paid_diagnostic", "2033-05-18T03:33:20.000Z"]],
+  );
+
+  const rejected = await processDiagnosticWebhook(
+    Buffer.from("{}"),
+    "signature",
+    {
+      getStoredWebhook: async () => ({
+        endpoint_id: "we_123",
+        signing_secret: "secret",
+      }),
+      constructEvent: async () => ({
+        type: "checkout.session.completed",
+        created: 2_000_000_000,
+        data: {
+          object: { ...paidDiagnosticSession, amount_total: 49_499 },
+        },
+      }),
+      recordConversion: async () => {
+        throw new Error("mismatched session must not be recorded");
+      },
+    },
+  );
+
+  assert.equal(rejected, false);
+  delete process.env.REPLIT_DOMAINS;
+});
 
 test("reconciles recent paid diagnostic sessions through the idempotent store", async () => {
   const calls: string[] = [];

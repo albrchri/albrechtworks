@@ -4,9 +4,9 @@ import { pool } from "@workspace/db";
 import { logger } from "./logger";
 
 const WEBHOOK_PATH = "/api/stripe/webhook";
-const DIAGNOSTIC_AMOUNT = 49_500;
-const DIAGNOSTIC_CURRENCY = "usd";
-const DIAGNOSTIC_OFFER = "operations_diagnostic";
+export const DIAGNOSTIC_AMOUNT = 49_500;
+export const DIAGNOSTIC_CURRENCY = "usd";
+export const DIAGNOSTIC_OFFER = "operations_diagnostic";
 const RECONCILIATION_INTERVAL_MS = 15 * 60 * 1000;
 const RECONCILIATION_LOOKBACK_SECONDS = 7 * 24 * 60 * 60;
 const STRIPE_PAGE_SIZE = 100;
@@ -25,14 +25,35 @@ type StripeWebhookEndpoint = {
   secret?: string;
 };
 
-type StripeCheckoutSession = {
+export type DiagnosticStripeSession = {
   id: string;
   amount_total?: number | null;
-  created: number;
+  created?: number;
   currency?: string | null;
   metadata?: Record<string, string>;
   payment_status?: string;
   status?: string | null;
+};
+
+type DiagnosticWebhookEvent = {
+  type: string;
+  created: number;
+  data: {
+    object: DiagnosticStripeSession;
+  };
+};
+
+type DiagnosticWebhookDependencies = {
+  getStoredWebhook: (url: string) => Promise<StoredWebhook | undefined>;
+  constructEvent: (
+    payload: Buffer,
+    signature: string,
+    signingSecret: string,
+  ) => Promise<DiagnosticWebhookEvent>;
+  recordConversion: (
+    checkoutSessionId: string,
+    completedAt?: Date,
+  ) => Promise<boolean>;
 };
 
 type StripeList<T> = {
@@ -64,6 +85,27 @@ const defaultReconciliationDependencies: DiagnosticReconciliationDependencies = 
   recordConversion: recordDiagnosticConversion,
   log: logger,
   now: () => new Date(),
+};
+
+const defaultWebhookDependencies: DiagnosticWebhookDependencies = {
+  getStoredWebhook: async (url) => {
+    const stored = await pool.query<StoredWebhook>(
+      `SELECT endpoint_id, signing_secret
+       FROM diagnostic_stripe_webhooks
+       WHERE url = $1`,
+      [url],
+    );
+    return stored.rows[0];
+  },
+  constructEvent: async (payload, signature, signingSecret) => {
+    const stripe = new Stripe("sk_placeholder_for_webhook_verification");
+    return stripe.webhooks.constructEventAsync(
+      payload,
+      signature,
+      signingSecret,
+    ) as Promise<DiagnosticWebhookEvent>;
+  },
+  recordConversion: recordDiagnosticConversion,
 };
 
 async function parseStripeResponse<T>(response: Response): Promise<T> {
@@ -170,22 +212,16 @@ export async function initializeDiagnosticConversions(): Promise<void> {
 export async function processDiagnosticWebhook(
   payload: Buffer,
   signature: string,
+  dependencies: DiagnosticWebhookDependencies = defaultWebhookDependencies,
 ): Promise<boolean> {
   const url = getWebhookUrl();
-  const stored = await pool.query<StoredWebhook>(
-    `SELECT endpoint_id, signing_secret
-     FROM diagnostic_stripe_webhooks
-     WHERE url = $1`,
-    [url],
-  );
-  const webhook = stored.rows[0];
+  const webhook = await dependencies.getStoredWebhook(url);
 
   if (!webhook) {
     throw new Error("Stripe webhook is not configured");
   }
 
-  const stripe = new Stripe("sk_placeholder_for_webhook_verification");
-  const event = await stripe.webhooks.constructEventAsync(
+  const event = await dependencies.constructEvent(
     payload,
     signature,
     webhook.signing_secret,
@@ -199,24 +235,19 @@ export async function processDiagnosticWebhook(
   }
 
   const session = event.data.object;
-  const isDiagnosticPurchase =
-    session.payment_status === "paid" &&
-    session.status === "complete" &&
-    session.amount_total === DIAGNOSTIC_AMOUNT &&
-    session.currency === DIAGNOSTIC_CURRENCY &&
-    session.metadata?.offer === DIAGNOSTIC_OFFER;
-
-  if (!isDiagnosticPurchase) {
+  if (!isPaidDiagnosticSession(session)) {
     return false;
   }
 
-  return recordDiagnosticConversion(
+  return dependencies.recordConversion(
     session.id,
     new Date(event.created * 1000),
   );
 }
 
-function isPaidDiagnosticSession(session: StripeCheckoutSession): boolean {
+export function isPaidDiagnosticSession(
+  session: Omit<DiagnosticStripeSession, "id">,
+): boolean {
   return (
     session.payment_status === "paid" &&
     session.status === "complete" &&
@@ -252,12 +283,13 @@ export async function reconcileDiagnosticConversions(
         { method: "GET" },
       );
       const page =
-        await parseStripeResponse<StripeList<StripeCheckoutSession>>(response);
+        await parseStripeResponse<StripeList<DiagnosticStripeSession>>(response);
 
       for (const session of page.data) {
         examined += 1;
         if (
           isPaidDiagnosticSession(session) &&
+          session.created !== undefined &&
           (await dependencies.recordConversion(
             session.id,
             new Date(session.created * 1000),

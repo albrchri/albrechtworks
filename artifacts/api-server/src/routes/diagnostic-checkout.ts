@@ -1,10 +1,13 @@
 import { Router, type IRouter } from "express";
 import { ReplitConnectors } from "@replit/connectors-sdk";
-import { recordDiagnosticConversion } from "../lib/diagnostic-conversions";
+import {
+  DIAGNOSTIC_AMOUNT,
+  DIAGNOSTIC_CURRENCY,
+  DIAGNOSTIC_OFFER,
+  isPaidDiagnosticSession,
+  recordDiagnosticConversion,
+} from "../lib/diagnostic-conversions";
 
-const DIAGNOSTIC_AMOUNT = 49_500;
-const DIAGNOSTIC_CURRENCY = "usd";
-const DIAGNOSTIC_OFFER = "operations_diagnostic";
 const DIAGNOSTIC_PRICE_LOOKUP_KEY = "operations_diagnostic";
 
 type StripeList<T> = {
@@ -129,12 +132,7 @@ export function createDiagnosticCheckoutRouter(
       );
       const session =
         await parseStripeResponse<StripeCheckoutSession>(response);
-      const paid =
-        session.payment_status === "paid" &&
-        session.status === "complete" &&
-        session.amount_total === DIAGNOSTIC_AMOUNT &&
-        session.currency === DIAGNOSTIC_CURRENCY &&
-        session.metadata?.offer === DIAGNOSTIC_OFFER;
+      const paid = isPaidDiagnosticSession(session);
 
       if (paid) {
         await dependencies.recordConversion(sessionId);
