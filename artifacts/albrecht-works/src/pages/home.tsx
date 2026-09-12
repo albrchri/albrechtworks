@@ -137,6 +137,49 @@ export default function Home() {
     };
   }, [privacyPolicyOpen]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+    if (params.get('checkout') !== 'success' || !sessionId) return;
+
+    const trackedKey = `diagnostic_purchase_completed:${sessionId}`;
+    if (window.sessionStorage.getItem(trackedKey)) return;
+
+    const verifyPurchase = async () => {
+      try {
+        const response = await fetch(
+          `/api/diagnostic-checkout/verify?session_id=${encodeURIComponent(sessionId)}`,
+        );
+        if (!response.ok) return;
+
+        const result = await response.json() as {
+          paid: boolean;
+          offer?: string;
+          value?: number;
+          currency?: string;
+        };
+        if (!result.paid || !result.offer || !result.value || !result.currency) return;
+
+        trackEvent('diagnostic_purchase_completed', {
+          offer: result.offer,
+          value: result.value,
+          currency: result.currency,
+          verification: 'stripe_session',
+        });
+        window.sessionStorage.setItem(trackedKey, 'true');
+
+        params.delete('checkout');
+        params.delete('session_id');
+        const nextUrl = `${window.location.pathname}${params.size ? `?${params}` : ''}${window.location.hash}`;
+        window.history.replaceState({}, '', nextUrl);
+      } catch {
+        // Verification failures must not interrupt the return experience.
+      }
+    };
+
+    void verifyPurchase();
+  }, []);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -565,7 +608,7 @@ export default function Home() {
                 <div className="text-center">
                   <Button asChild size="lg" className="w-full md:w-auto text-lg px-8 shadow-md">
                     <a
-                      href="https://buy.stripe.com/5kQ00k8Hxc2Bcs7dpc1oI00"
+                      href="/api/diagnostic-checkout"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackEvent('diagnostic_checkout_clicked', {

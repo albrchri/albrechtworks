@@ -11,7 +11,9 @@ test.describe('footer privacy policy', () => {
 
     await test.step('footer exposes the privacy policy entry point', async () => {
       await page.goto('/');
-      await expect(footer).toContainText('© 2026 Albrecht Works LLC. All rights reserved.');
+      await expect(footer).toContainText(
+        '© 2026 Albrecht Works LLC, Libertyville, IL. All rights reserved.',
+      );
       await expect(privacyPolicyButton).toBeVisible();
       initialUrl = page.url();
     });
