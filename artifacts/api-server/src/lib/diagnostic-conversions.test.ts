@@ -75,6 +75,7 @@ test("reconciles recent paid diagnostic sessions through the idempotent store", 
   const calls: string[] = [];
   const recorded: Array<{ id: string; completedAt: Date }> = [];
   const infoLogs: unknown[][] = [];
+  let clearedFailure = false;
   const pages = [
     {
       data: [
@@ -126,8 +127,21 @@ test("reconciles recent paid diagnostic sessions through the idempotent store", 
       recorded.push({ id, completedAt });
       return id !== "cs_existing_diagnostic";
     },
+    recordFailure: async () => {
+      throw new Error("successful reconciliation must not record a failure");
+    },
+    sendAlert: async () => {
+      throw new Error("successful reconciliation must not send an alert");
+    },
+    markAlertSent: async () => {
+      throw new Error("successful reconciliation must not mark an alert sent");
+    },
+    clearFailure: async () => {
+      clearedFailure = true;
+    },
     log: {
       error: () => undefined,
+      fatal: () => undefined,
       info: (...args: unknown[]) => {
         infoLogs.push(args);
       },
@@ -148,11 +162,14 @@ test("reconciles recent paid diagnostic sessions through the idempotent store", 
   assert.match(calls[0] ?? "", /created%5Bgte%5D=1999395200/);
   assert.match(calls[1] ?? "", /starting_after=cs_other_offer/);
   assert.deepEqual(infoLogs[0]?.[0], { examined: 3, recorded: 1 });
+  assert.equal(clearedFailure, true);
 });
 
 test("logs and rejects when Stripe cannot be reached", async () => {
   const errors: unknown[][] = [];
+  const fatals: unknown[][] = [];
   const stripeError = new Error("connector unavailable");
+  const failedAt = new Date("2026-09-12T12:00:00.000Z");
 
   await assert.rejects(
     reconcileDiagnosticConversions({
@@ -162,23 +179,95 @@ test("logs and rejects when Stripe cannot be reached", async () => {
         },
       }),
       recordConversion: async () => false,
+      recordFailure: async () => ({
+        consecutiveFailures: 2,
+        firstFailedAt: new Date("2026-09-12T11:45:00.000Z"),
+        alertSent: false,
+      }),
+      sendAlert: async () => {
+        throw new Error("a recent failure must not send an alert");
+      },
+      markAlertSent: async () => {
+        throw new Error("a recent failure must not mark an alert sent");
+      },
+      clearFailure: async () => {
+        throw new Error("failed reconciliation must not clear failure state");
+      },
       log: {
         error: (...args: unknown[]) => {
           errors.push(args);
         },
+        fatal: (...args: unknown[]) => {
+          fatals.push(args);
+        },
         info: () => undefined,
       } as never,
-      now: () => new Date(),
+      now: () => failedAt,
     }),
     stripeError,
   );
 
   assert.equal(errors.length, 1);
-  assert.deepEqual(errors[0]?.[0], { err: stripeError });
+  assert.deepEqual(errors[0]?.[0], {
+    err: stripeError,
+    consecutiveFailures: 2,
+    firstFailedAt: "2026-09-12T11:45:00.000Z",
+  });
   assert.equal(
     errors[0]?.[1],
     "Diagnostic conversion reconciliation could not reach Stripe",
   );
+  assert.equal(fatals.length, 0);
+});
+
+test("alerts operators once continuous reconciliation failures pass one day", async () => {
+  const fatals: unknown[][] = [];
+  const stripeError = new Error("connector unavailable");
+  let markedAlertSent = false;
+  let sentAlert = false;
+
+  await assert.rejects(
+    reconcileDiagnosticConversions({
+      createConnector: () => ({
+        proxy: async () => {
+          throw stripeError;
+        },
+      }),
+      recordConversion: async () => false,
+      recordFailure: async () => ({
+        consecutiveFailures: 97,
+        firstFailedAt: new Date("2026-09-11T11:59:00.000Z"),
+        alertSent: false,
+      }),
+      sendAlert: async () => {
+        sentAlert = true;
+        return true;
+      },
+      markAlertSent: async () => {
+        markedAlertSent = true;
+      },
+      clearFailure: async () => undefined,
+      log: {
+        error: () => undefined,
+        fatal: (...args: unknown[]) => fatals.push(args),
+        info: () => undefined,
+      } as never,
+      now: () => new Date("2026-09-12T12:00:00.000Z"),
+    }),
+    stripeError,
+  );
+
+  assert.equal(fatals.length, 1);
+  assert.deepEqual(fatals[0]?.[0], {
+    alert: "diagnostic_conversion_reconciliation_stalled",
+    consecutiveFailures: 97,
+    firstFailedAt: "2026-09-11T11:59:00.000Z",
+    recoveryWindowDays: 7,
+    action:
+      "Restore the Stripe connection and confirm diagnostic reconciliation succeeds.",
+  });
+  assert.equal(sentAlert, true);
+  assert.equal(markedAlertSent, true);
 });
 
 test("reports only the aggregate authoritative paid diagnostic total", async (t) => {

@@ -9,6 +9,7 @@ export const DIAGNOSTIC_CURRENCY = "usd";
 export const DIAGNOSTIC_OFFER = "operations_diagnostic";
 const RECONCILIATION_INTERVAL_MS = 15 * 60 * 1000;
 const RECONCILIATION_LOOKBACK_SECONDS = 7 * 24 * 60 * 60;
+const RECONCILIATION_ALERT_AFTER_MS = 24 * 60 * 60 * 1000;
 const STRIPE_PAGE_SIZE = 100;
 const WEBHOOK_EVENTS = [
   "checkout.session.completed",
@@ -63,7 +64,13 @@ type StripeList<T> = {
 
 type StripeConnector = Pick<ReplitConnectors, "proxy">;
 
-type ReconciliationLogger = Pick<typeof logger, "error" | "info">;
+type ReconciliationLogger = Pick<typeof logger, "error" | "fatal" | "info">;
+
+type ReconciliationFailureState = {
+  consecutiveFailures: number;
+  firstFailedAt: Date;
+  alertSent: boolean;
+};
 
 type DiagnosticReconciliationDependencies = {
   createConnector: () => StripeConnector;
@@ -71,6 +78,10 @@ type DiagnosticReconciliationDependencies = {
     checkoutSessionId: string,
     completedAt?: Date,
   ) => Promise<boolean>;
+  recordFailure: (failedAt: Date) => Promise<ReconciliationFailureState>;
+  sendAlert: (failure: ReconciliationFailureState) => Promise<boolean>;
+  markAlertSent: () => Promise<void>;
+  clearFailure: () => Promise<void>;
   log: ReconciliationLogger;
   now: () => Date;
 };
@@ -83,6 +94,10 @@ export type DiagnosticConversionReport = {
 const defaultReconciliationDependencies: DiagnosticReconciliationDependencies = {
   createConnector: () => new ReplitConnectors(),
   recordConversion: recordDiagnosticConversion,
+  recordFailure: recordDiagnosticReconciliationFailure,
+  sendAlert: sendDiagnosticReconciliationAlert,
+  markAlertSent: markDiagnosticReconciliationAlertSent,
+  clearFailure: clearDiagnosticReconciliationFailure,
   log: logger,
   now: () => new Date(),
 };
@@ -169,6 +184,14 @@ export async function initializeDiagnosticConversions(): Promise<void> {
     CREATE TABLE IF NOT EXISTS diagnostic_purchase_conversions (
       checkout_session_id TEXT PRIMARY KEY,
       completed_at TIMESTAMPTZ NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS diagnostic_reconciliation_failure (
+      singleton BOOLEAN PRIMARY KEY DEFAULT TRUE CHECK (singleton),
+      consecutive_failures INTEGER NOT NULL,
+      first_failed_at TIMESTAMPTZ NOT NULL,
+      last_failed_at TIMESTAMPTZ NOT NULL,
+      alert_sent BOOLEAN NOT NULL DEFAULT FALSE
     );
   `);
 
@@ -305,18 +328,120 @@ export async function reconcileDiagnosticConversions(
       }
     } while (startingAfter);
   } catch (error) {
+    const failedAt = dependencies.now();
+    const failure = await dependencies.recordFailure(failedAt);
     dependencies.log.error(
-      { err: error },
+      {
+        err: error,
+        consecutiveFailures: failure.consecutiveFailures,
+        firstFailedAt: failure.firstFailedAt.toISOString(),
+      },
       "Diagnostic conversion reconciliation could not reach Stripe",
     );
+    if (
+      !failure.alertSent &&
+      failedAt.getTime() - failure.firstFailedAt.getTime() >=
+        RECONCILIATION_ALERT_AFTER_MS
+    ) {
+      dependencies.log.fatal(
+        {
+          alert: "diagnostic_conversion_reconciliation_stalled",
+          consecutiveFailures: failure.consecutiveFailures,
+          firstFailedAt: failure.firstFailedAt.toISOString(),
+          recoveryWindowDays: 7,
+          action:
+            "Restore the Stripe connection and confirm diagnostic reconciliation succeeds.",
+        },
+        "Operator action required: diagnostic purchases are at risk of aging out of recovery",
+      );
+      if (await dependencies.sendAlert(failure)) {
+        await dependencies.markAlertSent();
+      } else {
+        dependencies.log.error(
+          { alert: "diagnostic_conversion_reconciliation_stalled" },
+          "Diagnostic reconciliation operator alert email could not be delivered",
+        );
+      }
+    }
     throw error;
   }
 
+  await dependencies.clearFailure();
   dependencies.log.info(
     { examined, recorded },
     "Reconciled diagnostic purchase conversions",
   );
   return { examined, recorded };
+}
+
+async function recordDiagnosticReconciliationFailure(
+  failedAt: Date,
+): Promise<ReconciliationFailureState> {
+  const result = await pool.query<{
+    consecutive_failures: number;
+    first_failed_at: Date;
+    alert_sent: boolean;
+  }>(
+    `INSERT INTO diagnostic_reconciliation_failure
+       (singleton, consecutive_failures, first_failed_at, last_failed_at)
+     VALUES (TRUE, 1, $1, $1)
+     ON CONFLICT (singleton) DO UPDATE SET
+       consecutive_failures =
+         diagnostic_reconciliation_failure.consecutive_failures + 1,
+       last_failed_at = EXCLUDED.last_failed_at
+     RETURNING consecutive_failures, first_failed_at, alert_sent`,
+    [failedAt],
+  );
+  const state = result.rows[0];
+  if (!state) throw new Error("Failed to persist reconciliation failure state");
+  return {
+    consecutiveFailures: state.consecutive_failures,
+    firstFailedAt: state.first_failed_at,
+    alertSent: state.alert_sent,
+  };
+}
+
+async function markDiagnosticReconciliationAlertSent(): Promise<void> {
+  await pool.query(
+    `UPDATE diagnostic_reconciliation_failure
+     SET alert_sent = TRUE
+     WHERE singleton = TRUE`,
+  );
+}
+
+async function sendDiagnosticReconciliationAlert(
+  failure: ReconciliationFailureState,
+): Promise<boolean> {
+  try {
+    const connectors = new ReplitConnectors();
+    const response = await connectors.proxy("resend", "/emails", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: "Albrecht Works <onboarding@resend.dev>",
+        to: ["chris@albrechtworks.com"],
+        subject: "Action required: Stripe purchase recovery is stalled",
+        text: [
+          "Diagnostic purchase reconciliation has failed continuously for more than 24 hours.",
+          "",
+          `First failure: ${failure.firstFailedAt.toISOString()}`,
+          `Consecutive failures: ${failure.consecutiveFailures}`,
+          "",
+          "Restore the Stripe connection and confirm the reconciliation job succeeds.",
+          "Unrecovered purchases can only be found within the seven-day recovery window.",
+        ].join("\n"),
+      }),
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
+async function clearDiagnosticReconciliationFailure(): Promise<void> {
+  await pool.query(
+    "DELETE FROM diagnostic_reconciliation_failure WHERE singleton = TRUE",
+  );
 }
 
 export function startDiagnosticConversionReconciliation(): NodeJS.Timeout {
