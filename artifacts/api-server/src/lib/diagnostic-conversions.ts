@@ -317,7 +317,7 @@ export async function initializeDiagnosticConversions(): Promise<void> {
     );
 
     CREATE TABLE IF NOT EXISTS diagnostic_reconciliation_failure (
-      singleton BOOLEAN PRIMARY KEY DEFAULT TRUE CHECK (singleton),
+      singleton BOOLEAN PRIMARY KEY DEFAULT TRUE,
       consecutive_failures INTEGER NOT NULL,
       first_failed_at TIMESTAMPTZ NOT NULL,
       last_failed_at TIMESTAMPTZ NOT NULL,

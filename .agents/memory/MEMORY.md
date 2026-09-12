@@ -4,3 +4,4 @@
 - [Phone input verification](phone-input-verification.md) — assert progressive phone values with JSON.stringify so required trailing separators are not mistaken for missing characters.
 - [Playwright browser runtime](playwright-runtime.md) — local Chromium may need Nix runtime libraries; keep browser setup separate from app code.
 - [Diagnostic conversion authority](diagnostic-conversion-authority.md) — use the server conversion store as the purchase count; browser analytics remains non-authoritative.
+- [Publish CHECK constraint diffs](publish-check-constraint-diffs.md) — a valid development CHECK may be double-wrapped in a generated Publish diff; repair development, never production.
