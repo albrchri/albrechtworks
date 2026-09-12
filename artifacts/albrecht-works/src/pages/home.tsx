@@ -158,7 +158,12 @@ export default function Home() {
           value?: number;
           currency?: string;
         };
-        if (!result.paid || !result.offer || !result.value || !result.currency) return;
+        if (
+          !result.paid ||
+          !result.offer ||
+          !result.value ||
+          !result.currency
+        ) return;
 
         trackEvent('diagnostic_purchase_completed', {
           offer: result.offer,

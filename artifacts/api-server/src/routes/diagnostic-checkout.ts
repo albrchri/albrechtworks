@@ -1,5 +1,6 @@
 import { Router, type IRouter } from "express";
 import { ReplitConnectors } from "@replit/connectors-sdk";
+import { recordDiagnosticConversion } from "../lib/diagnostic-conversions";
 
 const router: IRouter = Router();
 
@@ -120,6 +121,10 @@ router.get("/diagnostic-checkout/verify", async (req, res): Promise<void> => {
       session.amount_total === DIAGNOSTIC_AMOUNT &&
       session.currency === DIAGNOSTIC_CURRENCY &&
       session.metadata?.offer === DIAGNOSTIC_OFFER;
+
+    if (paid) {
+      await recordDiagnosticConversion(sessionId);
+    }
 
     res.json({
       paid,
