@@ -563,8 +563,18 @@ export default function Home() {
                 </div>
 
                 <div className="text-center">
-                  <Button size="lg" className="w-full md:w-auto text-lg px-8 shadow-md" onClick={() => scrollTo('contact', 'diagnostic_section')}>
-                    Request the Diagnostic
+                  <Button asChild size="lg" className="w-full md:w-auto text-lg px-8 shadow-md">
+                    <a
+                      href="https://buy.stripe.com/5kQ00k8Hxc2Bcs7dpc1oI00"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackEvent('diagnostic_checkout_clicked', {
+                        offer: 'operations_diagnostic',
+                        price: 495,
+                      })}
+                    >
+                      Book the Diagnostic ($495)
+                    </a>
                   </Button>
                 </div>
               </div>
