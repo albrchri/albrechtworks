@@ -624,6 +624,9 @@ export default function Home() {
                       Book the Diagnostic ($495)
                     </a>
                   </Button>
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                    After payment, I'll call you within 1 business day to schedule your 90-minute session at a time that works for you.
+                  </p>
                 </div>
               </div>
             </motion.div>
