@@ -65,7 +65,10 @@ test.describe('diagnostic checkout analytics', () => {
     const checkoutLink = page.getByRole('link', {
       name: 'Book the Diagnostic ($495)',
     });
-    await expect(checkoutLink).toHaveAttribute('href', '/api/diagnostic-checkout');
+    await expect(checkoutLink).toHaveAttribute(
+      'href',
+      'https://buy.stripe.com/5kQ00k8Hxc2Bcs7dpc1oI00',
+    );
   });
 
   test('does not track completion when Stripe verification says unpaid', async ({

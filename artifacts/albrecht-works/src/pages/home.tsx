@@ -613,7 +613,7 @@ export default function Home() {
                 <div className="text-center">
                   <Button asChild size="lg" className="w-full md:w-auto text-lg px-8 shadow-md">
                     <a
-                      href="/api/diagnostic-checkout"
+                      href="https://buy.stripe.com/5kQ00k8Hxc2Bcs7dpc1oI00"
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => trackEvent('diagnostic_checkout_clicked', {
