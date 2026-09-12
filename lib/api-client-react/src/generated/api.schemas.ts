@@ -24,3 +24,18 @@ export interface ContactFormResponse {
   success: boolean;
 }
 
+export interface DiagnosticConversionReport {
+  /** @minimum 0 */
+  diagnostic_checkout_clicked: number;
+  /** @minimum 0 */
+  paidDiagnostics: number;
+}
+
+export type GetDiagnosticConversionReportParams = {
+/**
+ * Aggregate diagnostic_checkout_clicked count from website analytics.
+ * @minimum 0
+ */
+diagnostic_checkout_clicked: number;
+};
+

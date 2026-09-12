@@ -31,7 +31,10 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { trackEvent } from '@/lib/analytics';
+import {
+  DIAGNOSTIC_CHECKOUT_CLICKED_EVENT,
+  trackEvent,
+} from '@/lib/analytics';
 
 const headerWordmarkSrc = `${import.meta.env.BASE_URL}brand/header-wordmark.svg`;
 const footerWordmarkSrc = `${import.meta.env.BASE_URL}brand/footer-wordmark.svg`;
@@ -616,7 +619,7 @@ export default function Home() {
                       href="https://buy.stripe.com/5kQ00k8Hxc2Bcs7dpc1oI00"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => trackEvent('diagnostic_checkout_clicked', {
+                      onClick={() => trackEvent(DIAGNOSTIC_CHECKOUT_CLICKED_EVENT, {
                         offer: 'operations_diagnostic',
                         price: 495,
                       })}

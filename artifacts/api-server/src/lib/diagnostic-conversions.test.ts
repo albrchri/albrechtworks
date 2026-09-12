@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { reconcileDiagnosticConversions } from "./diagnostic-conversions";
+import {
+  getDiagnosticConversionReport,
+  reconcileDiagnosticConversions,
+} from "./diagnostic-conversions";
+import { pool } from "@workspace/db";
 
 test("reconciles recent paid diagnostic sessions through the idempotent store", async () => {
   const calls: string[] = [];
@@ -110,4 +114,19 @@ test("logs and rejects when Stripe cannot be reached", async () => {
     errors[0]?.[1],
     "Diagnostic conversion reconciliation could not reach Stripe",
   );
+});
+
+test("reports only the aggregate authoritative paid diagnostic total", async (t) => {
+  t.mock.method(pool, "query", async (query: unknown) => {
+    assert.match(String(query), /COUNT\(\*\)/);
+    assert.doesNotMatch(String(query), /checkout_session_id\s+AS/i);
+    return { rows: [{ paid_diagnostics: "7" }] } as never;
+  });
+
+  const report = await getDiagnosticConversionReport(12);
+
+  assert.deepEqual(report, {
+    diagnostic_checkout_clicked: 12,
+    paidDiagnostics: 7,
+  });
 });

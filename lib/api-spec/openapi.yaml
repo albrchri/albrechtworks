@@ -12,6 +12,8 @@ tags:
     description: Health operations
   - name: contact
     description: Contact form operations
+  - name: diagnostics
+    description: Aggregate diagnostic reporting
 paths:
   /healthz:
     get:
@@ -49,6 +51,30 @@ paths:
           description: Invalid contact form submission
         "502":
           description: Email delivery failed
+  /diagnostic-report:
+    get:
+      operationId: getDiagnosticConversionReport
+      tags: [diagnostics]
+      summary: Get aggregate diagnostic conversions
+      description: Combines the website analytics checkout-click count with the authoritative paid diagnostic total, without checkout, customer, or payment details.
+      parameters:
+        - name: diagnostic_checkout_clicked
+          in: query
+          required: true
+          description: Aggregate diagnostic_checkout_clicked count from website analytics.
+          schema:
+            type: number
+            minimum: 0
+            multipleOf: 1
+      responses:
+        "200":
+          description: Aggregate diagnostic conversion report
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DiagnosticConversionReport"
+        "400":
+          description: Invalid aggregate checkout-click count
 components:
   schemas:
     HealthStatus:
@@ -85,4 +111,18 @@ components:
           type: boolean
       required:
         - success
+    DiagnosticConversionReport:
+      type: object
+      properties:
+        diagnostic_checkout_clicked:
+          type: number
+          minimum: 0
+          multipleOf: 1
+        paidDiagnostics:
+          type: number
+          minimum: 0
+          multipleOf: 1
+      required:
+        - diagnostic_checkout_clicked
+        - paidDiagnostics
 

@@ -7,4 +7,4 @@ Treat the idempotent server-side conversion store as the authoritative count of 
 
 **Why:** Replit-hosted website analytics has no documented trusted server-side custom-event ingestion API. Relaying webhook conversions through anonymous browsers cannot guarantee both delivery and at-most-once analytics emission.
 
-**How to apply:** Build purchase totals and reconciliation from the server conversion records. Keep browser analytics payloads aggregate-only and do not relay Checkout Session identifiers or payment/customer details to analytics.
+**How to apply:** Build purchase totals and reconciliation from the server conversion records. Operator reports may combine that aggregate with the stable browser click event name, but must not return or relay Checkout Session identifiers or payment/customer details.

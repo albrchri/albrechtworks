@@ -54,6 +54,11 @@ type DiagnosticReconciliationDependencies = {
   now: () => Date;
 };
 
+export type DiagnosticConversionReport = {
+  diagnostic_checkout_clicked: number;
+  paidDiagnostics: number;
+};
+
 const defaultReconciliationDependencies: DiagnosticReconciliationDependencies = {
   createConnector: () => new ReplitConnectors(),
   recordConversion: recordDiagnosticConversion,
@@ -306,4 +311,18 @@ export async function recordDiagnosticConversion(
   );
 
   return result.rowCount === 1;
+}
+
+export async function getDiagnosticConversionReport(
+  diagnosticCheckoutClicked: number,
+): Promise<DiagnosticConversionReport> {
+  const result = await pool.query<{ paid_diagnostics: string }>(
+    `SELECT COUNT(*)::text AS paid_diagnostics
+     FROM diagnostic_purchase_conversions`,
+  );
+
+  return {
+    diagnostic_checkout_clicked: diagnosticCheckoutClicked,
+    paidDiagnostics: Number(result.rows[0]?.paid_diagnostics ?? 0),
+  };
 }

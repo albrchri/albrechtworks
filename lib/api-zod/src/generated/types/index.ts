@@ -8,4 +8,6 @@
 
 export * from './contactFormRequest';
 export * from './contactFormResponse';
+export * from './diagnosticConversionReport';
+export * from './getDiagnosticConversionReportParams';
 export * from './healthStatus';

@@ -1,5 +1,8 @@
 type AnalyticsData = Record<string, string | number | boolean>;
 
+export const DIAGNOSTIC_CHECKOUT_CLICKED_EVENT =
+  'diagnostic_checkout_clicked' as const;
+
 declare global {
   interface Window {
     umami?: {

@@ -41,3 +41,30 @@ export const SubmitContactFormResponse = zod.object({
 })
 
 
+/**
+ * Combines the website analytics checkout-click count with the authoritative paid diagnostic total, without checkout, customer, or payment details.
+ * @summary Get aggregate diagnostic conversions
+ */
+export const getDiagnosticConversionReportQueryDiagnosticCheckoutClickedMin = 0;
+export const getDiagnosticConversionReportQueryDiagnosticCheckoutClickedMultipleOf = 1;
+
+
+
+export const GetDiagnosticConversionReportQueryParams = zod.object({
+  "diagnostic_checkout_clicked": zod.coerce.number().min(getDiagnosticConversionReportQueryDiagnosticCheckoutClickedMin).multipleOf(getDiagnosticConversionReportQueryDiagnosticCheckoutClickedMultipleOf).describe('Aggregate diagnostic_checkout_clicked count from website analytics.')
+})
+
+export const getDiagnosticConversionReportResponseDiagnosticCheckoutClickedMin = 0;
+export const getDiagnosticConversionReportResponseDiagnosticCheckoutClickedMultipleOf = 1;
+
+export const getDiagnosticConversionReportResponsePaidDiagnosticsMin = 0;
+export const getDiagnosticConversionReportResponsePaidDiagnosticsMultipleOf = 1;
+
+
+
+export const GetDiagnosticConversionReportResponse = zod.object({
+  "diagnostic_checkout_clicked": zod.number().min(getDiagnosticConversionReportResponseDiagnosticCheckoutClickedMin).multipleOf(getDiagnosticConversionReportResponseDiagnosticCheckoutClickedMultipleOf),
+  "paidDiagnostics": zod.number().min(getDiagnosticConversionReportResponsePaidDiagnosticsMin).multipleOf(getDiagnosticConversionReportResponsePaidDiagnosticsMultipleOf)
+})
+
+

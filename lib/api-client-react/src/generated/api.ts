@@ -22,6 +22,8 @@ import type {
 import type {
   ContactFormRequest,
   ContactFormResponse,
+  DiagnosticConversionReport,
+  GetDiagnosticConversionReportParams,
   HealthStatus
 } from './api.schemas';
 
@@ -202,3 +204,81 @@ export const useSubmitContactForm = <TError = ErrorType<void>,
       return useMutation(getSubmitContactFormMutationOptions(options));
     }
 
+export const getGetDiagnosticConversionReportUrl = (params: GetDiagnosticConversionReportParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/diagnostic-report?${stringifiedParams}` : `/api/diagnostic-report`
+}
+
+/**
+ * Combines the website analytics checkout-click count with the authoritative paid diagnostic total, without checkout, customer, or payment details.
+ * @summary Get aggregate diagnostic conversions
+ */
+export const getDiagnosticConversionReport = async (params: GetDiagnosticConversionReportParams, options?: Parameters<typeof customFetch>[1]): Promise<DiagnosticConversionReport> => {
+
+  return customFetch<DiagnosticConversionReport>(getGetDiagnosticConversionReportUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetDiagnosticConversionReportQueryKey = (params?: GetDiagnosticConversionReportParams,) => {
+    return [
+    `/api/diagnostic-report`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetDiagnosticConversionReportQueryOptions = <TData = Awaited<ReturnType<typeof getDiagnosticConversionReport>>, TError = ErrorType<void>>(params: GetDiagnosticConversionReportParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getDiagnosticConversionReport>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetDiagnosticConversionReportQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getDiagnosticConversionReport>>> = ({ signal }) => getDiagnosticConversionReport(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getDiagnosticConversionReport>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetDiagnosticConversionReportQueryResult = NonNullable<Awaited<ReturnType<typeof getDiagnosticConversionReport>>>
+export type GetDiagnosticConversionReportQueryError = ErrorType<void>
+
+
+/**
+ * @summary Get aggregate diagnostic conversions
+ */
+
+export function useGetDiagnosticConversionReport<TData = Awaited<ReturnType<typeof getDiagnosticConversionReport>>, TError = ErrorType<void>>(
+ params: GetDiagnosticConversionReportParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getDiagnosticConversionReport>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetDiagnosticConversionReportQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
